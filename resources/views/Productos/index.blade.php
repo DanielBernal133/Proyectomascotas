@@ -1,16 +1,26 @@
-<h1>Lista Pedidos</h1>
 
-<table>
+@extends('layouts.plantillabase');
+
+
+@section('contenido')
+
+<a href="{{ url('Productos/create') }}" class="btn btn-primary">
+    Nuevo producto
+</a>
+
+
+<table class=" table table-sm">
     <thead>
    <tr>
 
     <th>idProducto</th>
-    <th>Nombre del Producto</th>
-    <th>Descripcion Producto</th>
-    <th>Cantidad Producto</th>
-    <th>Precio Producto</th>
-    <th>Imagen Producto </th>
-    <th>Estado Producto </th>
+    <th>Nombre </th>
+    <th>Descripcion </th>
+    <th>Cantidad </th>
+    <th>Precio </th>
+    <th>Imagen  </th>
+    <th>Estado  </th>
+
 
     <th></th>
 
@@ -38,7 +48,11 @@
 
 
 
-         <td></td>
+
+         <td>
+             <a class="btn btn-info "> Editar</a>
+             <button class="btn btn-secondary ">Borrar</button>
+         </td>
      </tr>
 
 
@@ -49,6 +63,12 @@
 
 
 </table>
-<a href="{{ url('Productos/create') }}">
-    Nuevo producto
-</a>
+
+
+
+@endsection
+
+
+
+
+

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Pedido;
 use Illuminate\Http\Request;
 
+
 class PedidoController extends Controller
 {
     /**
@@ -14,7 +15,11 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        return view('Pedidos.index ')->with( 'Pedidos', Pedido::paginate(10));
+        //return view('Pedidos.index ')->with( 'Pedidos', Pedido::paginate(10));
+
+        //return 'Vista index()';
+        $pedidos = Pedido::all();
+        return view('Pedidos.index')->with('pedido',$pedidos);
     }
 
     /**
@@ -24,7 +29,7 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        return view ('pedido.create');
+        return view('Pedidos.create');
     }
 
     /**
@@ -33,42 +38,18 @@ class PedidoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store( Request $request)
     {
-        //Validacion: procesar datos de un input
-        //1. establecer las reglas de validacion:
 
-         $reglas_validacion=[
-             "fechaSolicitud"=>'',
-             "fechaEnvio",
-             "fechaEntrega",
-             "estadoPedido",
-        ];
 
-        //2. Crear el objeto de validacion:
-        $validador = Validator::make($request->all(), $reglas_validacion);
+        $nuevopedidos = new Pedido();
+        $nuevopedidos->fechaSolicitud = $request->get('fechaSolicitud');
+        $nuevopedidos->fechaEnvio = $request->get('fechaEnvío');
+        $nuevopedidos->fechaEntrega = $request->get('fechaEntrega');
+        $nuevopedidos->estadoPedido = $request->get('estadoPedido');
+        $nuevopedidos->save();
 
-        //3. Validar
-        if($validador->fails()){
-            //validacion fallida
-            return redirect('pedido/create')->withErrors($validador);
-        }
-
-        //seleccionar el id maximo que haya en los pedidos
-        $maxpedido=Pedido::all()->max('Pedidoid');
-
-        //crear el nuevo recurso pedidos
-        $nuevopedido = new Pedido();
-        $nuevopedido->fechaSolicitud = $request->input("fechasolicitud");
-        $nuevopedido->fechaEnvio = $request->input("fechaenvio");
-        $nuevopedido->fechaEntrega = $request->input("fechaentrega");
-        $nuevopedido->estadoPedido = $request->input("estado");
-        $nuevopedido->save();
-
-        //redireccionar a la ruta deseada
-        //radireccionar solo sirve en rutas GET
-        //redirect puede enviar a la ruta destino lo que se denomina como datos flash
-        return redirect("pedidos")->with('mensaje_exito', "Pedido exitoso");
+        return redirect('/Pedidos');
     }
 
 
@@ -92,11 +73,8 @@ class PedidoController extends Controller
 
     public function edit(Pedido $pedido)
     {
-        $editpedido = Pedido::find($pedido);
-
-
-        //mostar el formulario de actualizar recurso: pedido
-        return view('pedido.edit')->with('pedido' , $editpedido);
+        //$editpedido = Pedido::find($pedido);
+         return view('Pedidos.edit')->with('pedido',$pedido);
     }
 
     /**
@@ -106,9 +84,18 @@ class PedidoController extends Controller
      * @param  \App\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pedido $pedido)
+    public function update( $request, Pedido $pedido)
     {
-        //
+        $pedido = Pedido::find($pedido);
+        $pedido->fechaSolicitud = $request->get('fechaSolicitud');
+        $pedido->fechaEnvío = $request->get('fechaEnvío');
+        $pedido->fechaEntrega = $request->get('fechaEntrega');
+        $pedido->estadoPedido = $request->get('estadoPedido');
+        $pedido->save();
+
+        return redirect('/Pedidos');
+
+
     }
 
     /**
@@ -119,6 +106,9 @@ class PedidoController extends Controller
      */
     public function destroy(Pedido $pedido)
     {
-        //
+        $pedido = Pedido::find($pedido);
+        $pedido->delete();
+
+        return redirect('/Pedidos');
     }
 }

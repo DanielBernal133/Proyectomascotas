@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Producto;
 use Illuminate\Http\Request;
+use App\Categoria;
+
 
 class ProductoController extends Controller
 {
@@ -24,7 +26,9 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return view('productos.create');
+       $categorias=Categoria::all();
+
+        return view('productos.create')->with("categorias" , $categorias);
     }
 
     /**
@@ -35,7 +39,24 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $maxproducto=Producto::all()->max('idProdcuto');
+
+        $nuevoproductos = new Producto();
+
+        $nuevoproductos->nombreProducto=$request->input("nombre");
+        $nuevoproductos->descripcionProducto=$request->input("descripcion");
+        $nuevoproductos->cantidadProducto=$request->input("cantidad");
+        $nuevoproductos->precioProducto=$request->input("precio");
+        $nuevoproductos->imagenProducto=$request->input("imagen");
+        $nuevoproductos->estadoProducto=1;
+        $nuevoproductos->idCategoriaFK=$request->input("categoria");
+        $nuevoproductos->idMarcaFK=1;
+        $nuevoproductos->save();
+
+
+
+
     }
 
     /**
