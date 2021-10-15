@@ -18,8 +18,8 @@
     <th>Descripcion </th>
     <th>Cantidad </th>
     <th>Precio </th>
-    <th>Imagen  </th>
     <th>Estado  </th>
+    <th>Imagen  </th>
 
 
     <th></th>
@@ -42,16 +42,43 @@
          <td>{{$Producto->descripcionProducto}}</td>
          <td>{{$Producto->cantidadProducto}}</td>
          <td>{{$Producto->precioProducto}}</td>
-         <td>{{$Producto->imagenProducto}}</td>
-         <td>{{$Producto->estadoProducto}}</td>
+         <td>
+            @switch($Producto->estadoProducto)
+                @case(null)
+                <a class="btn btn-primary" href="{{ url('Productos/'. $Producto->idProducto . "/habilitar") }}">
+                    Asignar estado
+                </a>
+                @break
+                @case(1)
+                <strong class="text-success">Estado hablilitado</strong>
+                <a class="btn btn-primary" href="{{ url('Productos/'. $Producto->idProducto . "/habilitar") }}">
+                    Deshabilitar
+                </a>
+                @break
+                @case(2)
+                <strong class="text-danger">Estado deshabilitado</strong>
+                <a class="btn btn-primary" href="{{ url('Productos/'. $Producto->idProducto . "/habilitar") }}">
+                    Habilitar
+                </a>
+                @break
+            @endswitch
+        </td>
+
+
+          <td>
+          <img src="{{asset('storage').'/'.$Producto->imagenProducto}}" width="100" att="">
+
+
+        <!--Php artisan storage:link}} -->
+
 
 
 
 
 
          <td>
-             <a class="btn btn-info "> Editar</a>
-             <button class="btn btn-secondary ">Borrar</button>
+            <a href="/Productos/{{$Producto->idProducto }}/edit" class="btn btn-info">Editar</a>
+
          </td>
      </tr>
 
@@ -63,6 +90,7 @@
 
 
 </table>
+{{ $Productos->links() }}
 
 
 

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Pedido;
+use App\pedidoDeProducto;
 use Illuminate\Http\Request;
+use App\Cliente;
+use App\Empleado;
+use Illuminate\Support\Facades\Validator;
 
 
 class PedidoController extends Controller
@@ -15,11 +19,13 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        //return view('Pedidos.index ')->with( 'Pedidos', Pedido::paginate(10));
+        return view('Pedidos.tables')
+        ->with( 'Pedidos', Pedido::paginate(10));
+
 
         //return 'Vista index()';
-        $pedidos = Pedido::all();
-        return view('Pedidos.index')->with('pedido',$pedidos);
+        //$pedidos = Pedido::all();
+        //return view('Pedidos.index')->with('pedido',$pedidos);
     }
 
     /**
@@ -29,7 +35,12 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        return view('Pedidos.create');
+        //return view('Pedidos.create');
+        $empleado=Empleado::All();
+        $cliente=Cliente::all();
+        $pedido=Pedido::all();
+
+        return view('Pedidos.create')->with("Pedidos", $pedido)->with("empleados" , $empleado)->with("clientes" , $cliente);
     }
 
     /**
@@ -40,16 +51,27 @@ class PedidoController extends Controller
      */
     public function store( Request $request)
     {
+        $maxproducto=pedido::all()->max('idPedido');
 
 
-        $nuevopedidos = new Pedido();
-        $nuevopedidos->fechaSolicitud = $request->get('fechaSolicitud');
-        $nuevopedidos->fechaEnvio = $request->get('fechaEnvío');
-        $nuevopedidos->fechaEntrega = $request->get('fechaEntrega');
-        $nuevopedidos->estadoPedido = $request->get('estadoPedido');
-        $nuevopedidos->save();
+        $nuevopedidos = new pedido();
+        $nuevopedidos->fechaSolicitud=$request->input("fechasolicitud");
+        $nuevopedidos->fechaEnvio=$request->input("fechaEnvío");
+        $nuevopedidos->fechaEntrega=$request->input("fechaEntrega");
+        $nuevopedidos->idClienteFK=$request->input("cliente");
+        $nuevopedidos->idEmpleadoFK=$request->input("empleado");
+        $nuevopedidos->estadoPedido = 1;
 
-        return redirect('/Pedidos');
+        if($nuevopedidos->fechaSolicitud> $nuevopedidos->fechaEnvio&&$nuevopedidos->fechaEntrega){
+            return redirect('Pedidos')->with('mensaje_exito' , "La fecha de solicitud es mas grande a la de entrega y Envio");
+        }else{
+            $nuevopedidos->save();
+        echo "Pedido Exitoso";
+        }
+
+
+
+        //return redirect('/Pedidos');
     }
 
 
@@ -71,10 +93,11 @@ class PedidoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function edit(Pedido $pedido)
+    public function edit(/*Pedido*/ $pedido)
     {
-        //$editpedido = Pedido::find($pedido);
-         return view('Pedidos.edit')->with('pedido',$pedido);
+        $editpedido = Pedido::find($pedido);
+        return view('Pedidos.edit')->with('pedido',$editpedido);
+         //var_dump($editpedido);
     }
 
     /**
@@ -84,16 +107,18 @@ class PedidoController extends Controller
      * @param  \App\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function update( $request, Pedido $pedido)
+    public function update(Request $request, /*Pedido*/ $pedido)
     {
         $pedido = Pedido::find($pedido);
-        $pedido->fechaSolicitud = $request->get('fechaSolicitud');
-        $pedido->fechaEnvío = $request->get('fechaEnvío');
-        $pedido->fechaEntrega = $request->get('fechaEntrega');
-        $pedido->estadoPedido = $request->get('estadoPedido');
+        $pedido->fechaSolicitud = $request->input("fechaSolicitud");
+        $pedido->fechaEnvio = $request->input("fechaEnvio");
+        $pedido->fechaEntrega = $request->input("fechaEntrega");
+        $pedido->estadoPedido = $request->input("estadoPedido");
+        $pedido->idClienteFK=$request->input("cliente");
+        $pedido->idEmpleadoFK=$request->input("empleado");
         $pedido->save();
 
-        return redirect('/Pedidos');
+        echo "Pedido Actualizado";
 
 
     }
@@ -104,11 +129,30 @@ class PedidoController extends Controller
      * @param  \App\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pedido $pedido)
-    {
-        $pedido = Pedido::find($pedido);
-        $pedido->delete();
+    public function destroy(Pedido $pedido){}
 
-        return redirect('/Pedidos');
+    public function estadopedido($idPedido){
+
+        $pedido = Pedido::find($idPedido);
+        switch($pedido->estadoPedido){
+            case null:
+                $pedido->estadoPedido= 1;
+                $pedido->save();
+                $mensaje_exito = "Pedido Activado";
+                break;
+            case 1:
+                $pedido->estadoPedido = 2;
+                $pedido->save();
+                $mensaje_exito = "Pedido Desactivado";
+                break;
+            case 2:
+                $pedido->estadoPedido= 1;
+                $pedido->save();
+                $mensaje_exito = "Pedido Activado";
+                break;
+        }
+        return redirect('Pedidos')->with('mensaje_exito' , $mensaje_exito);
     }
+
+
 }

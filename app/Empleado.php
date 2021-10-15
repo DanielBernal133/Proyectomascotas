@@ -6,21 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Empleado extends Model
 {
-    //vvincular modelo atributo
-    protected $table="empleado";
-//establecer la PK para la entidad (por defecto: id)
-protected $primaryKey ="idEmpleado";
-
-    //omitir campos de auditoria
-
+    //vincular modelo a tabla
+    protected $table="Empleado";
+    //establecer la clave primaria para la entidad (por defecto: id)
+    protected $primaryKey = "idEmpleado";
+    //Omitir campos de auditoria
     public $timestamps = false;
 
+    //relacion 1 a M entre empleado y pedido
+    public function pedido (){
+        //utilizo el metodo de eloquent: hasMany
+        return $this->hasMany('App\Pedido', 'idEmpleado');
+    }
 
+    public function usuario(){
+        return $this->belongsto("App\User" , 'idUsuarioFK');
+    }
 
-
-     public function empleadospedidos(){
-
-        return $this-> hasMany('App\Pedido', 'idEmpleadoFK' );
-     }
 
 }

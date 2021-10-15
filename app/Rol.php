@@ -14,13 +14,5 @@ protected $primaryKey ="idRol";
     //omitir campos de auditoria
     public $timestamps = false;
 
-
-
-     public function usuarios(){
-
-        return $this-> hasMany('App\Usuario', 'idRolFK' );
-     }
-
-
 }
 
