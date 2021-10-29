@@ -25,11 +25,11 @@ Route::get('variables', function(){
 
 Route::resource('Productos', 'ProductoController');
 
-Route::resource('Pedidos', 'PedidoController');
+Route::resource('Pedidos', 'PedidoController')->middleware('sesiones');
 
-Route::resource('Empleados', 'EmpleadoController');
+Route::resource('empleados', 'EmpleadoController');
 
-Route::resource('Clientes', 'ClienteController');
+Route::resource('clientes', 'ClienteController');
 
 Route::resource('Categorias', 'CategoriaController');
 
@@ -43,6 +43,59 @@ Route::resource('PedidosProductos', 'pedidoDeProductoController');
 
 Route::resource('Marcas', 'MarcaController');
 
+
+//Rutas get
+
+Route::get('Productos/{Producto}/habilitar' , "ProductoController@habilitar");
+
+Route::get('Pedidos/{pedido}/estadopedido', "PedidoController@estadopedido");
+
+Route::get('empleados/{empleado}/habilitar' , "EmpleadoController@habilitar");
+
 //php artisan  make:controller
 //EmpleadoController --resource --model=Empleado
 
+Route::get('clientes/{cliente}/habilitar' , "ClienteController@habilitar");
+
+//RUTAS DE AUTENTICACION
+Route::resource('usuarios', 'UserController');
+
+
+//Carrito
+
+Route::get('carrito', 'CarritoController@index')->name('carrito.shop')->middleware('cliente');
+
+Route::get('add-to-cart/{idpedidProducto}', 'CarritoController@addTocart');
+
+Route::get('cart' , 'CarritoController@cart')->name('cart.view');
+
+
+//Route pagina
+Route::get('/', function (){
+    return view('pagina.index');
+})->name('inicio');
+
+
+
+Route::resource('datoscliente', 'DatosClienteController');
+
+
+Route::resource('usuarios', 'UserController');
+Route::get('registrar' , 'UserController@create')->name('registrar.form');
+
+//Rutas de autenticacion
+Route::get('login' , 'Auth\LoginController@form')->name('login.form');
+Route::post('login' , 'Auth\LoginController@login')->name('login.verify');
+Route::get('logout' , 'Auth\LoginController@logout')->name('logout.auth');
+
+//rutas de envio de correo
+Route::get('confirmar-correo', 'Auth\ResetPasswordController@emailform');
+Route::post('enviar-link', 'Auth\ResetPasswordController@submitlink')-> name ("send.link");
+Route::get('reset-password/{token}', 'Auth\ResetPasswordController@resetform');
+Route::post('reset-password', 'Auth\ResetPasswordController@resetpassword')-> name ("reset.password");
+
+//ruta pdf
+Route::get('pdfprod', 'PDFControllerProducto@pdf');
+Route::get('pdfclie', 'PDFControllerCliente@pdf');
+Route::get('pdfemple', 'PDFControllerEmpleado@pdf');
+Route::get('pdfpedi', 'PDFControllerPedido@pdf');

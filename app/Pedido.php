@@ -24,5 +24,20 @@ protected $primaryKey ="idPedido";
         return $this-> hasMany('App\pedidoDeProducto', 'idPedidoFK'  );
      }
 
+     public function clientes(){
+        return $this->hasMany(Cliente::class, 'nombreCliente', 'nombreCliente');
+    }
+
+     public function cliente(){
+        return $this->belongsto("App\Cliente" , 'idClienteFK');
+     }
+
+     public function empleado(){
+        return $this->belongsto("App\Empleado" , 'idEmpleadoFK');
+     }
+
+
+
+
 
 }

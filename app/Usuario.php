@@ -16,17 +16,13 @@ class Usuario extends Model
 
 
        public function clientes(){
-
         return $this-> hasMany('App\Cliente', 'idUsuarioFK' );
      }
 
 
      public function empleados(){
-
         return $this-> hasMany('App\Empleado', 'idUsuarioFk' );
-
-
-
      }
+
 
    }

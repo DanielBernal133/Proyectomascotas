@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Producto;
 use Illuminate\Http\Request;
 use App\Categoria;
+use App\Marca;
+use App\Http\Requests\StoreProducto;
 
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -16,7 +19,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        return view('Productos.index ')->with( 'Productos', Producto::paginate(10));
+        return view('Productos.tables')->with( 'Productos', Producto::paginate(10));
     }
 
     /**
@@ -28,7 +31,10 @@ class ProductoController extends Controller
     {
        $categorias=Categoria::all();
 
-        return view('productos.create')->with("categorias" , $categorias);
+        $marcas=Marca::all();
+
+        return view('productos.create')->with("categorias" , $categorias)->with('marcas' , $marcas);
+
     }
 
     /**
@@ -37,24 +43,36 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProducto $request)
     {
 
         $maxproducto=Producto::all()->max('idProdcuto');
 
         $nuevoproductos = new Producto();
 
+
+
         $nuevoproductos->nombreProducto=$request->input("nombre");
         $nuevoproductos->descripcionProducto=$request->input("descripcion");
         $nuevoproductos->cantidadProducto=$request->input("cantidad");
         $nuevoproductos->precioProducto=$request->input("precio");
-        $nuevoproductos->imagenProducto=$request->input("imagen");
         $nuevoproductos->estadoProducto=1;
         $nuevoproductos->idCategoriaFK=$request->input("categoria");
-        $nuevoproductos->idMarcaFK=1;
-        $nuevoproductos->save();
+        $nuevoproductos->idMarcaFK=$request->input("marca");
+        $nuevoproductos->imagenProducto=$request->get("imagen");
 
 
+//script para subir imagen
+
+   if($request->hasFile('imagenProducto')){
+       $nuevoproductos['imagenProducto']=$request->file('imagenProducto')->store('uploads' ,'public');
+
+    }
+
+
+
+    $nuevoproductos->save();
+    return redirect('Productos');
 
 
     }
@@ -76,9 +94,12 @@ class ProductoController extends Controller
      * @param  \App\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
+    public function edit( /*Producto*/ $producto)
+
     {
-        //
+        $producto = Producto::find($producto);
+
+        return view('Productos.edit')->with('producto' , $producto);
     }
 
     /**
@@ -88,9 +109,35 @@ class ProductoController extends Controller
      * @param  \App\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(Request $request,/* Producto*/ $producto)
     {
-        //
+
+
+
+
+         $producto = Producto::find($producto);
+        $producto->nombreProducto = $request->input('nombre');
+        $producto->descripcionProducto = $request->input('descripcion');
+        $producto->cantidadProducto = $request->input('cantidad');
+        $producto->precioProducto = $request->input('precio');
+
+
+
+
+        if($request->hasFile('imagenProducto')){
+
+
+            Storage::delete('public/'.$producto->imagenProducto);
+
+            $producto->imagenProducto=$request->file('imagenProducto')->store('uploads' ,'public');
+
+         }
+
+
+        $producto->save();
+
+
+        return redirect('/Productos');
     }
 
     /**
@@ -103,4 +150,35 @@ class ProductoController extends Controller
     {
         //
     }
+    public function habilitar($idProducto){
+        $Producto = Producto::find($idProducto);
+        switch($Producto->estadoProducto){
+            case null:
+                $Producto->estadoProducto=1;
+                $Producto->save();
+                $mensaje_exito = 'Estado Habilitado';
+                break;
+            case 1:
+                $Producto->estadoProducto=2;
+                $Producto->save();
+                $mensaje_exito = 'Empleado Deshabilitado';
+
+                break;
+
+            case 2:
+                $Producto->estadoProducto=1;
+                $Producto->save();
+                $mensaje_exito = 'Empleado Activado';
+                break;
+
+
+
+
+        }
+        return redirect('Productos')->with('mensaje_exito', $mensaje_exito);
+    }
+
+
 }
+
+
