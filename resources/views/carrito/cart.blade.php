@@ -64,13 +64,6 @@
                         <nav class="main-nav d-none d-lg-flex">
                             <ul class="nav">
                                 <li>
-                                    <a href="{{ route('inicio')}}">
-                                        <span class="menu-text"> Inicio</span>
-
-                                    </a>
-
-                                </li>
-                                <li>
                                     <a href="{{ route('carrito.shop') }}">
                                         <span class="menu-text">Tienda</span>
                                     </a>
@@ -81,8 +74,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{route('login.form')}}">
-                                        <span class="menu-text"> Iniciar Sesión</span>
+                                    <a href="{{route('logout.auth')}}">
+                                        <span class="menu-text"> Cerrar Sesion</span>
                                     </a>
                                 </li>
                             </ul>
@@ -97,59 +90,36 @@
                                         <span class="cart-item_count">3</span>
                                     </a>
                                     <div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2">
+                                        <?php $total= 0 ?>
+                                    @if (session('cart'))
+                                        @foreach (session('cart') as $idProducto => $detalles)
+                                            <?php $total += $detalles['precio'] * $detalles['cantidad'] ?>
                                         <div class="single-cart-item">
                                             <div class="cart-img">
                                                 <a href="cart.html"><img src="assets/images/cart/1.jpg" alt=""></a>
                                             </div>
                                             <div class="cart-text">
-                                                <h5 class="title"><a href="cart.html">Odio tortor consequat</a></h5>
+                                                <h5 class="title"><a href="cart.html">{{ $detalles['nombre'] }}</a></h5>
                                                 <div class="cart-text-btn">
                                                     <div class="cart-qty">
-                                                        <span>1×</span>
-                                                        <span class="cart-price">$98.00</span>
+                                                        <span>{{ $detalles['cantidad'] }}×</span>
+                                                        <span class="cart-price">{{ $detalles['precio'] }}</span>
                                                     </div>
                                                     <button type="button"><i class="ion-trash-b"></i></button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="single-cart-item">
-                                            <div class="cart-img">
-                                                <a href="cart.html"><img src="assets/images/cart/2.jpg" alt=""></a>
-                                            </div>
-                                            <div class="cart-text">
-                                                <h5 class="title"><a href="cart.html">Integer eget augue</a></h5>
-                                                <div class="cart-text-btn">
-                                                    <div class="cart-qty">
-                                                        <span>1×</span>
-                                                        <span class="cart-price">$98.00</span>
-                                                    </div>
-                                                    <button type="button"><i class="ion-trash-b"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="single-cart-item">
-                                            <div class="cart-img">
-                                                <a href="cart.html"><img src="assets/images/cart/3.jpg" alt=""></a>
-                                            </div>
-                                            <div class="cart-text">
-                                                <h5 class="title"><a href="cart.html">Eleifend quam</a></h5>
-                                                <div class="cart-text-btn">
-                                                    <div class="cart-qty">
-                                                        <span>1×</span>
-                                                        <span class="cart-price">$98.00</span>
-                                                    </div>
-                                                    <button type="button"><i class="ion-trash-b"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                         <div class="cart-price-total d-flex justify-content-between">
                                             <h5>Total :</h5>
-                                            <h5>$166.00</h5>
+                                            <h5>{{ $total }}</h5>
                                         </div>
+
+                                        @endif
                                         <div class="cart-links d-flex justify-content-between">
-                                            <a class="btn product-cart button-icon flosun-button dark-btn" href="cart.html">View cart</a>
-                                            <a class="btn flosun-button secondary-btn rounded-0" href="checkout.html">Checkout</a>
+                                            <a class="btn product-cart button-icon flosun-button dark-btn" href="{{ route('cart.view') }}">Ver carrito</a>
                                         </div>
+
                                     </div>
                                 </li>
                                 <li class="sidemenu-wrap">
@@ -388,10 +358,10 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <div class="breadcrumb-content position-relative section-content">
-                        <h3 class="title-3">Shopping Cart</h3>
+                        <h3 class="title-3">Carrito WOOFMATE</h3>
                         <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li>Shopping Cart</li>
+                            <li><a href={{ url('carrito') }}>Tienda</a></li>
+                            <li>Carrito WOOFMATE</li>
                         </ul>
                     </div>
                 </div>

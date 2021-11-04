@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use RealRashid\SweetAlert\Facades\Alert;
 
-class Sesiones
+class ClientesSesiones
 {
     /**
      * Handle an incoming request.
@@ -17,14 +16,12 @@ class Sesiones
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check() && Auth::user()->idRolFK== '1'){
+        if (Auth::check() && Auth::user()->idRolFK == 4) {
             return $next($request);
-            return redirect('Pedidos');
-        }else if (Auth::check() && Auth::user()->idRolFK== '4') {
             return redirect('carrito');
-        }
-        else{
+        }else{
             return redirect()->route('login.verify')->with('mensaje' , "Debes iniciar sesion");
         }
+
     }
 }

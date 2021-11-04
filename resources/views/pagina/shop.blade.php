@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>FloSun - Flower Shop HTML5 Template</title>
+    <title>WOOFMATE</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -85,13 +85,36 @@
                                         <span class="cart-item_count">3</span>
                                     </a>
                                     <div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2">
+                                        <?php $total= 0 ?>
+                                    @if (session('cart'))
+                                        @foreach (session('cart') as $idProducto => $detalles)
+                                            <?php $total += $detalles['precio'] * $detalles['cantidad'] ?>
                                         <div class="single-cart-item">
                                             <div class="cart-img">
+                                                <a href="cart.html"><img src="assets/images/cart/1.jpg" alt=""></a>
                                             </div>
+                                            <div class="cart-text">
+                                                <h5 class="title"><a href="cart.html">{{ $detalles['nombre'] }}</a></h5>
+                                                <div class="cart-text-btn">
+                                                    <div class="cart-qty">
+                                                        <span>{{ $detalles['cantidad'] }}×</span>
+                                                        <span class="cart-price">{{ $detalles['precio'] }}</span>
+                                                    </div>
+                                                    <button type="button"><i class="ion-trash-b"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                        <div class="cart-price-total d-flex justify-content-between">
+                                            <h5>Total :</h5>
+                                            <h5>{{ $total }}</h5>
+                                        </div>
+
+                                        @endif
                                         <div class="cart-links d-flex justify-content-between">
                                             <a class="btn product-cart button-icon flosun-button dark-btn" href="{{ route('cart.view') }}">Ver carrito</a>
-
                                         </div>
+
                                     </div>
                                 </li>
                                 <li class="sidemenu-wrap">

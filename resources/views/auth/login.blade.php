@@ -1,3 +1,7 @@
+@if (session('mensaje'))
+<p>   {{session('mensaje')}}</p>
+@endif
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,10 +44,6 @@
                                         <img class="imagenLogin" src="assets/images/logo/logo.png" alt="">
                                         <h1 class="h4 text-gray-900 mb-4">Inicia Sesión</h1>
                                     </div>
-                                    @if (session('mensaje'))
-                                        <p>   {{session('mensaje')}}</p>
-
-                                    @endif
                                     <form class="user"method="POST" action="{{ url('login') }}">
                                         @csrf
                                         <div class="form-group">

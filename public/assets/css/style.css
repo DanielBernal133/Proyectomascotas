@@ -7263,7 +7263,11 @@ mark {
 }
 
 .breadcrumbs-area .breadcrumb-content .title-3 {
+<<<<<<< HEAD
   font-family: "Great Vibes", cursive;
+=======
+  font-family: "FontAwesome";
+>>>>>>> Daniel
   font-size: 30px;
   font-weight: 700;
 }

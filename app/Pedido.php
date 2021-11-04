@@ -36,8 +36,4 @@ protected $primaryKey ="idPedido";
         return $this->belongsto("App\Empleado" , 'idEmpleadoFK');
      }
 
-
-
-
-
 }

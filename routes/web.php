@@ -23,25 +23,34 @@ Route::get('variables', function(){
 } );
 
 
-Route::resource('Productos', 'ProductoController');
+Route::resource('Productos', 'ProductoController')->middleware('sesiones');
 
 Route::resource('Pedidos', 'PedidoController')->middleware('sesiones');
 
-Route::resource('empleados', 'EmpleadoController');
+Route::resource('empleados', 'EmpleadoController')->middleware('sesiones');
 
-Route::resource('clientes', 'ClienteController');
+Route::resource('clientes', 'ClienteController')->middleware('sesiones');
 
-Route::resource('Categorias', 'CategoriaController');
+Route::resource('Categorias', 'CategoriaController')->middleware('sesiones');
 
 Route::resource('Usuarios', 'UsuarioController');
 
-Route::resource('Tipos', 'TipoController');
+Route::resource('Tipos', 'TipoController')->middleware('sesiones');
 
-Route::resource('Roles', 'RolController');
+Route::resource('Roles', 'RolController')->middleware('sesiones');
 
-Route::resource('PedidosProductos', 'pedidoDeProductoController');
+Route::resource('PedidosProductos', 'pedidoDeProductoController')->middleware('sesiones');
 
-Route::resource('Marcas', 'MarcaController');
+Route::resource('Marcas', 'MarcaController')->middleware('sesiones');
+
+
+//Rutas get
+
+Route::get('Productos/{Producto}/habilitar' , "ProductoController@habilitar")->middleware('sesiones');
+
+Route::get('Pedidos/{pedido}/estadopedido', "PedidoController@estadopedido")->middleware('sesiones');
+
+Route::get('empleados/{empleado}/habilitar' , "EmpleadoController@habilitar")->middleware('sesiones');
 
 
 //Rutas get
@@ -55,7 +64,7 @@ Route::get('empleados/{empleado}/habilitar' , "EmpleadoController@habilitar");
 //php artisan  make:controller
 //EmpleadoController --resource --model=Empleado
 
-Route::get('clientes/{cliente}/habilitar' , "ClienteController@habilitar");
+Route::get('clientes/{cliente}/habilitar' , "ClienteController@habilitar")->middleware('sesiones');
 
 //RUTAS DE AUTENTICACION
 Route::resource('usuarios', 'UserController');
@@ -63,11 +72,11 @@ Route::resource('usuarios', 'UserController');
 
 //Carrito
 
-Route::get('carrito', 'CarritoController@index')->name('carrito.shop')->middleware('cliente');
+Route::get('carrito', 'CarritoController@index')->name('carrito.shop')->middleware('sesionesCli');
 
-Route::get('add-to-cart/{idpedidProducto}', 'CarritoController@addTocart');
+Route::get('add-to-cart/{idpedidProducto}', 'CarritoController@addTocart')->middleware('sesionesCli');
 
-Route::get('cart' , 'CarritoController@cart')->name('cart.view');
+Route::get('cart' , 'CarritoController@cart')->name('cart.view')->middleware('sesionesCli');
 
 
 //Route pagina

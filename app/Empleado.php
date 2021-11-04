@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Empleado extends Model
 {
     //vincular modelo a tabla
-    protected $table="Empleado";
+    protected $table="empleado";
     //establecer la clave primaria para la entidad (por defecto: id)
     protected $primaryKey = "idEmpleado";
     //Omitir campos de auditoria
