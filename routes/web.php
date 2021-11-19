@@ -13,15 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-Route::get('variables', function(){
-    echo 'Hola';
-} );
-
 
 Route::resource('Productos', 'ProductoController')->middleware('sesiones');
 
@@ -31,7 +22,7 @@ Route::resource('empleados', 'EmpleadoController')->middleware('sesiones');
 
 Route::resource('clientes', 'ClienteController')->middleware('sesiones');
 
-Route::resource('Categorias', 'CategoriaController')->middleware('sesiones');
+// Route::resource('Categorias', 'CategoriaController')->middleware('sesiones');
 
 Route::resource('Usuarios', 'UsuarioController');
 
@@ -55,11 +46,6 @@ Route::get('empleados/{empleado}/habilitar' , "EmpleadoController@habilitar")->m
 
 //Rutas get
 
-Route::get('Productos/{Producto}/habilitar' , "ProductoController@habilitar");
-
-Route::get('Pedidos/{pedido}/estadopedido', "PedidoController@estadopedido");
-
-Route::get('empleados/{empleado}/habilitar' , "EmpleadoController@habilitar");
 
 //php artisan  make:controller
 //EmpleadoController --resource --model=Empleado
@@ -67,7 +53,6 @@ Route::get('empleados/{empleado}/habilitar' , "EmpleadoController@habilitar");
 Route::get('clientes/{cliente}/habilitar' , "ClienteController@habilitar")->middleware('sesiones');
 
 //RUTAS DE AUTENTICACION
-Route::resource('usuarios', 'UserController');
 
 
 //Carrito
@@ -90,6 +75,7 @@ Route::resource('datoscliente', 'DatosClienteController');
 
 
 Route::resource('usuarios', 'UserController');
+Route::resource('usuarios2', 'UsuarioController');
 Route::get('registrar' , 'UserController@create')->name('registrar.form');
 
 //Rutas de autenticacion

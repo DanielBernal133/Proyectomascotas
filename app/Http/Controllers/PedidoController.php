@@ -66,7 +66,7 @@ class PedidoController extends Controller
             return redirect('Pedidos')->with('mensaje_exito' , "La fecha de solicitud es mas grande a la de entrega y Envio");
         }else{
             $nuevopedidos->save();
-        echo "Pedido Exitoso";
+            return redirect('Pedidos')->with('mensaje_exito' , "Pedido Exitoso");
         }
 
 
@@ -118,7 +118,7 @@ class PedidoController extends Controller
         $pedido->idEmpleadoFK=$request->input("empleado");
         $pedido->save();
 
-        echo "Pedido Actualizado";
+        return redirect('Pedidos')->with('mensaje_exito' , "Pedido actualizado correctamente");
 
 
     }

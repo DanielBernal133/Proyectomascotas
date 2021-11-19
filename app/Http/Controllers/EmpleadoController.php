@@ -18,7 +18,6 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        echo session('mensaje_exito');
         return view('empleados.tables')->with('empleados' , Empleado::paginate(10));
     }
 
@@ -46,10 +45,8 @@ class EmpleadoController extends Controller
         $nuevoempleado->nombreEmpleado= $request->input("nombre");
         $nuevoempleado->telefonoEmpleado= $request->input("telefono");
         $nuevoempleado->estadoEmpleado= $request->input("estado");
-        $nuevoempleado->idUsuarioFK= $request->input("usuario");
+        $nuevoempleado->idUsuarioFK= 9;
         $nuevoempleado->save();
-
-
         return redirect("empleados")->with('mensaje_exito' , "Empleado exitoso");
     }
 

@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
-
     <!-- CSS
 	============================================ -->
     <!-- Bootstrap CSS -->
@@ -89,6 +88,7 @@
                                     @if (session('cart'))
                                         @foreach (session('cart') as $idProducto => $detalles)
                                             <?php $total += $detalles['precio'] * $detalles['cantidad'] ?>
+                                            @if (Auth::user()->idUsuario == $detalles['IdCliente'])
                                         <div class="single-cart-item">
                                             <div class="cart-img">
                                                 <a href="cart.html"><img src="assets/images/cart/1.jpg" alt=""></a>
@@ -104,12 +104,12 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
                                         @endforeach
                                         <div class="cart-price-total d-flex justify-content-between">
                                             <h5>Total :</h5>
                                             <h5>{{ $total }}</h5>
                                         </div>
-
                                         @endif
                                         <div class="cart-links d-flex justify-content-between">
                                             <a class="btn product-cart button-icon flosun-button dark-btn" href="{{ route('cart.view') }}">Ver carrito</a>
@@ -389,9 +389,6 @@
                                 </div>
                             </form>
                         </div>
-                        @if ( session("mesnaje_exito"))
-                        <div>{{ session("mensaje_exito") }} </div>
-                    @endif
                     </div>
 
                     <!--shop toolbar end-->
@@ -644,8 +641,15 @@
 
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    @if ( session("mensaje_exito"))
+        <script>
+            swal("Agregado" , "{{ session('mensaje_exito') }}" , "success", {
+                button: "OK",
+            });
+        </script>
+    {{-- <div>{{ session("mensaje_exito") }} </div> --}}
+    @endif
 </body>
 
 </html>

@@ -1,7 +1,3 @@
-@if (session('mensaje'))
-<p>   {{session('mensaje')}}</p>
-@endif
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,7 +84,26 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> --}}
+    @if ( session("mensaje_exito"))
+        <script>
+            swal("Exito!", "{{ session('mensaje_exito') }}", "success");
+        </script>
+    {{-- <div>{{ session("mensaje_exito") }} </div> --}}
+    @endif
 
+    @if (session('mensaje'))
+    <script>
+      swal("Exito!", "{{ session('mensaje') }}", "success");
+    </script>
+    @endif
+
+    @if (session('mensajeerror'))
+    <script>
+      swal("Oops..", "{{ session('mensajeerror') }}", "error");
+    </script>
+    @endif
 </body>
 
 </html>

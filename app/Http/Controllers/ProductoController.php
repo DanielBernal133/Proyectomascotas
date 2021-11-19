@@ -68,13 +68,8 @@ class ProductoController extends Controller
        $nuevoproductos['imagenProducto']=$request->file('imagenProducto')->store('uploads' ,'public');
 
     }
-
-
-
     $nuevoproductos->save();
-    return redirect('Productos');
-
-
+    return redirect('Productos')->with('mensaje_exito' , "Producto agregado correctamente");
     }
 
     /**
@@ -125,19 +120,15 @@ class ProductoController extends Controller
 
 
         if($request->hasFile('imagenProducto')){
-
-
             Storage::delete('public/'.$producto->imagenProducto);
-
             $producto->imagenProducto=$request->file('imagenProducto')->store('uploads' ,'public');
-
          }
 
 
         $producto->save();
 
 
-        return redirect('/Productos');
+        return redirect('Productos')->with('mensaje_exito' , "Producto actualizado correctamente");
     }
 
     /**

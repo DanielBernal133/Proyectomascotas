@@ -54,7 +54,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-2 col-xl-2 col-md-6 col-6 col-custom">
                         <div class="header-logo d-flex align-items-center">
-                            <a href="index.html">
+                            <a>
                                 <img class="img-full" src="assets/images/logo/logo.png" alt="Header Logo">
                             </a>
                         </div>
@@ -325,20 +325,8 @@
                     </div>
                     <!-- Intro Content End -->
                 </div>
-                <div class="intro11-section swiper-slide slide-2 slide-bg-1 bg-position">
-                    <!-- Intro Content Start -->
-                    <div class="intro11-content text-left">
-                        <h3 class="title-slider black-slider-title text-uppercase">Collection</h3>
-                        <h2 class="title">Flowers and Candle <br> Birthday Gift</h2>
-                        <p class="desc-content">Lorem ipsum dolor sit amet, pri autem nemore bonorum te. Autem fierent ullamcorper ius no, nec ea quodsi invenire. </p>
-                        <a href="product-details.html" class="btn flosun-button secondary-btn rounded-0">Shop Now</a>
-                    </div>
-                    <!-- Intro Content End -->
-                </div>
             </div>
             <!-- Slider Navigation -->
-            <div class="home1-slider-prev swiper-button-prev main-slider-nav"><i class="lnr lnr-arrow-left"></i></div>
-            <div class="home1-slider-next swiper-button-next main-slider-nav"><i class="lnr lnr-arrow-right"></i></div>
             <!-- Slider pagination -->
             <div class="swiper-pagination"></div>
         </div>
@@ -1578,7 +1566,6 @@
     <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
-
     <!-- Swiper Slider JS -->
     <script src="assets/js/plugins/swiper-bundle.min.js"></script>
     <!-- nice select JS -->
@@ -1591,10 +1578,9 @@
     <script src="assets/js/plugins/jquery.countdown.min.js"></script>
     <!-- jquery magnific popup js -->
     <script src="assets/js/plugins/jquery.magnific-popup.min.js"></script>
-
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
 </body>
 

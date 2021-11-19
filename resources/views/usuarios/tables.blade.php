@@ -100,7 +100,6 @@
                         <a class="collapse-item" href="{{url('Productos')}}">Productos</a>
                         <a class="collapse-item" href="{{url('empleados')}}">Empleados</a>
                         <a class="collapse-item" href="{{url('clientes')}}">Clientes</a>
-                        <a class="collapse-item" href="{{url('usuarios2')}}">Usuarios</a>
 
                     </div>
                 </div>
@@ -332,7 +331,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h4 class="m-0 font-weight-bold text-primary">Tabla Pedidos</h4>
+                            <h4 class="m-0 font-weight-bold text-primary">Tabla Usuarios</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -340,74 +339,39 @@
                                     <thead>
                                         <tr>
                                           <th >ID</th>
-                                          <th >Fecha Solicitud</th>
-                                          <th >Fecha Envío</th>
-                                          <th >Fecha Entrega</th>
-                                          <th>Cliente</th>
-                                          <th>Empleado</th>
-                                          <th >Actualizar</th>
-                                          <th >Estado Pedido</th>
+                                          <th >Nombre Usuario</th>
+                                          <th >Apellido Usuario</th>
+                                          <th >Correo Usuario</th>
+                                          <th>Rol Usuario</th>
+                                          <th>Asignar Rol</th>
                                         </tr>
                                       </thead>
                                     <tfoot>
                                         <tr>
-                                            <th >ID</th>
-                                            <th >Fecha Solicitud</th>
-                                            <th >Fecha Envío</th>
-                                            <th >Fecha Entrega</th>
-                                            <th>Cliente</th>
-                                            <th>Empleado</th>
-                                            <th >Actualizar</th>
-                                            <th >Estado Pedido</th>
+                                            <th>ID</th>
+                                            <th>Nombre Usuario</th>
+                                            <th>Apellido Usuario</th>
+                                            <th>Correo Usuario</th>
+                                            <th>Rol Usuario</th>
+                                            <th>Asignar Rol</th>
                                           </tr>
                                     </tfoot>
                                     <tbody>
-                                        @foreach ($Pedidos as $pedido)
+                                        @foreach ($usuarios as $usuario)
                                         <tr>
-                                            <td>{{$pedido->idPedido}}</td>
-                                            <td>{{$pedido->fechaSolicitud}}</td>
-                                            <td>{{$pedido->fechaEnvio}}</td>
-                                            <td>{{$pedido->fechaEntrega}}</td>
-                                            <td>{{$pedido->cliente()->first()->nombreCliente}}</td>
-                                            <th>{{$pedido->empleado()->first()->nombreEmpleado}}</th>
-
-
-
+                                            <td>{{$usuario->idUsuario}}</td>
+                                            <td>{{$usuario->name}}</td>
+                                            <td>{{$usuario->apellido}}</td>
+                                            <td>{{$usuario->email}}</td>
+                                            <td>{{$usuario->Rol()->first()->rol}}</td>
                                             <td>
-
-                                                <a href="{{url ('Pedidos/' . $pedido->idPedido . "/edit") }}" class="btn btn-info">Editar</a>
-                                                  @method('')
-                                                  @csrf
-                                             </form>
-                                             <td>
-                                                @switch($pedido->estadoPedido)
-                                                    @case( null )
-                                                    <a href="{{ url ('Pedidos/' . $pedido->idPedido . "/estadopedido" ) }}">
-                                                        Asignar estado
-                                                    </a>
-                                                    @break
-                                                    @case( 1 )
-                                                         <strong class="text success"> Pedido Habilitado </strong>
-                                                         <a href="{{ url ('Pedidos/' . $pedido->idPedido . "/estadopedido" ) }}">
-                                                        Deshabilitar
-                                                    </a>
-                                                    @break
-                                                    @case( 2 )
-                                                        <strong class="text success"> Pedido Deshabilitado </strong>
-                                                        <a href="{{ url ('Pedidos/' . $pedido->idPedido . "/estadopedido" ) }}">
-                                                        Habilitar
-                                                    </a>
-                                                    @break
-
-                                                @endswitch
+                                                <a href="{{url ('usuarios2/' . $usuario->idUsuario . "/edit") }}" class="btn btn-info">Asignar rol</a>
                                             </td>
-                                            </td>
+
                                         </tr>
                                         @endforeach
                                       </tbody>
                                 </table>
-                                <a href="Pedidos/create" class="btn btn-primary">CREAR PEDIDO</a>
-                                <a href="{{url ('pdfpedi')}}" class="btn btn-info">Generar Reporte</a>
                 <!-- /.container-fluid -->
 
             </div>
@@ -470,14 +434,7 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> --}}
-    @if ( session("mensaje_exito"))
-        <script>
-            swal("Trabajo echo!", "{{ session('mensaje_exito') }}", "success");
-        </script>
-    {{-- <div>{{ session("mensaje_exito") }} </div> --}}
-    @endif
+
 </body>
 
 </html>

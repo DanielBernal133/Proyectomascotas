@@ -37,6 +37,6 @@ class LoginController extends Controller
      //metodo logout cierra estado de sesion de usuario
         Auth::logout();
     //redirigir al login
-    return redirect()->route('login.form');
+    return redirect()->route('login.form')->with('mensaje_exito' , "Sesion cerrada correctamente");
     }
 }

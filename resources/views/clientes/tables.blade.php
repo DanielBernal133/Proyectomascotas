@@ -130,6 +130,7 @@
                         <a class="collapse-item" href="{{url('Productos')}}">Productos</a>
                         <a class="collapse-item" href="{{url('Pedidos')}}">Pedidos</a>
                         <a class="collapse-item" href="{{url('empleados')}}">Empleados</a>
+                        <a class="collapse-item" href="{{url('usuarios2')}}">Usuarios</a>
 
                     </div>
                 </div>
@@ -360,13 +361,10 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h4 class="m-0 font-weight-bold text-primary">Tabla Clientes</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                @if (session('mensaje_exito'))
-                                    <div>{{session('mensaje_exito')}}</div>
-                                @endif
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
@@ -524,7 +522,14 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> --}}
+    @if ( session("mensaje_exito"))
+        <script>
+            swal("Trabajo echo!", "{{ session('mensaje_exito') }}", "success");
+        </script>
+    {{-- <div>{{ session("mensaje_exito") }} </div> --}}
+    @endif
 </body>
 
 </html>

@@ -25,4 +25,7 @@ class Usuario extends Model
      }
 
 
+     public function Rol(){
+        return $this->belongsto("App\Rol" , 'idRolFK');
+    }
    }

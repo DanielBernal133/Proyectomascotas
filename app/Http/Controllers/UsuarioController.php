@@ -10,11 +10,11 @@ class UsuarioController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response FK_Usuario_idRolFK
      */
     public function index()
     {
-        //
+        return view('usuarios.tables')->with('usuarios' , Usuario::all());
     }
 
     /**
@@ -57,7 +57,7 @@ class UsuarioController extends Controller
      */
     public function edit(Usuario $usuario)
     {
-        //
+       return view('usuarios.edit')->with('usuario' , $usuario);
     }
 
     /**
@@ -69,7 +69,9 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, Usuario $usuario)
     {
-        //
+        $usuario->idRolFK= $request->input('rol');
+        $usuario->save();
+        echo "Rol cambiado";
     }
 
     /**

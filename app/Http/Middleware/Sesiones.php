@@ -24,7 +24,7 @@ class Sesiones
             return redirect('carrito');
         }
         else{
-            return redirect()->route('login.verify')->with('mensaje' , "Debes iniciar sesion");
+            return redirect()->route('login.verify')->with('mensajeerror' , "Debes iniciar sesion");
         }
     }
 }

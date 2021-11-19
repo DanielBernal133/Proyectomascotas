@@ -94,6 +94,7 @@
                                     @if (session('cart'))
                                         @foreach (session('cart') as $idProducto => $detalles)
                                             <?php $total += $detalles['precio'] * $detalles['cantidad'] ?>
+                                            @if (Auth::user()->idUsuario == $detalles['IdCliente'])
                                         <div class="single-cart-item">
                                             <div class="cart-img">
                                                 <a href="cart.html"><img src="assets/images/cart/1.jpg" alt=""></a>
@@ -109,12 +110,12 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
                                         @endforeach
                                         <div class="cart-price-total d-flex justify-content-between">
                                             <h5>Total :</h5>
                                             <h5>{{ $total }}</h5>
                                         </div>
-
                                         @endif
                                         <div class="cart-links d-flex justify-content-between">
                                             <a class="btn product-cart button-icon flosun-button dark-btn" href="{{ route('cart.view') }}">Ver carrito</a>
@@ -392,7 +393,8 @@
                                     @if (session('cart'))
                                         @foreach (session('cart') as $idProducto => $detalles)
                                             <?php $total += $detalles['precio'] * $detalles['cantidad'] ?>
-                                <tr>
+                                        @if (Auth::user()->idUsuario == $detalles['IdCliente'])
+                                    <tr>
                                     <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/images/product/small-size/1.jpg" alt="Product" /></a></td>
                                     <td class="pro-title"><a href="#">{{ $detalles['nombre'] }}</td>
                                     <td class="pro-price"><span> {{ $detalles['precio'] }}</span></td>
@@ -410,6 +412,7 @@
                                     <td class="pro-subtotal"><span>{{ $detalles['precio'] * $detalles['cantidad'] }}</span></td>
                                     <td class="pro-remove"><a href="#"><i class="lnr lnr-trash"></i></a></td>
                                 </tr>
+                                @endif
                                 @endforeach
                                 @endif
                             </tbody>
@@ -506,6 +509,16 @@
 
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+    {{-- Sweetalerts --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    @if ( session("mensaje_exito"))
+        <script>
+            swal("Agregado" , "{{ session('mensaje_exito') }}" , "success", {
+                button: "OK",
+            });
+        </script>
+    {{-- <div>{{ session("mensaje_exito") }} </div> --}}
+    @endif
 
 
 </body>
