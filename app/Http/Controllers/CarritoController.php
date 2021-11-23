@@ -39,8 +39,8 @@ class CarritoController extends Controller
             return redirect('carrito')->with('mensaje_exito', 'El producto se añadio correctamente al carrito');
         }else if(isset(session('cart')[$idProducto])){
             $cart[$idProducto]['cantidad']++;
-            echo "Cantidad Cambiada del producto $idProducto";
             session()->put('cart', $cart);
+            return redirect('carrito')->with('mensaje_exito', "Cantidad agregada del producto exitosamente");
         }else {
             $cart[$idProducto] = [
                 "nombre"=>$producto->nombreProducto,
@@ -52,8 +52,16 @@ class CarritoController extends Controller
             return redirect('carrito')->with('mensaje_exito', "Producto añadido al carrito");
             // echo "Producto añadido al carrito";
         }
-
-
-
+    }
+    public function remove(Request $request)
+    {
+        if($request->idProducto) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->idProducto])) {
+                unset($cart[$request->idProducto]);
+                session()->put('cart', $cart);
+            }
+            echo "Producto removido";
+        }
     }
 }

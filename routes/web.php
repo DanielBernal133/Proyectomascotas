@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+
 Route::resource('Productos', 'ProductoController')->middleware('sesiones');
 
 Route::resource('Pedidos', 'PedidoController')->middleware('sesiones');
@@ -62,6 +63,8 @@ Route::get('carrito', 'CarritoController@index')->name('carrito.shop')->middlewa
 Route::get('add-to-cart/{idpedidProducto}', 'CarritoController@addTocart')->middleware('sesionesCli');
 
 Route::get('cart' , 'CarritoController@cart')->name('cart.view')->middleware('sesionesCli');
+
+Route::delete('remove-from-cart', 'CarritoController@remove');
 
 
 //Route pagina

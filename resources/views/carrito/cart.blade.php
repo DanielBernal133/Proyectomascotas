@@ -410,7 +410,7 @@
                                         </div>
                                     </td>
                                     <td class="pro-subtotal"><span>{{ $detalles['precio'] * $detalles['cantidad'] }}</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="lnr lnr-trash"></i></a></td>
+                                    <td class="pro-remove"><a class="remove-from-cart" data-id="{{ $idProducto }}"><i class="lnr lnr-trash"></i></a></td>
                                 </tr>
                                 @endif
                                 @endforeach
@@ -519,8 +519,22 @@
         </script>
     {{-- <div>{{ session("mensaje_exito") }} </div> --}}
     @endif
-
-
+    <script>
+        $(".remove-from-cart").click(function (e) {
+                e.preventDefault();
+                var ele = $(this);
+                if(confirm("¿Estas seguro de eliminar el producto del carrito?")) {
+                    $.ajax({
+                        url: '{{ url('remove-from-cart') }}',
+                        method: "DELETE",
+                        data: {_token: '{{ csrf_token() }}', idProducto: ele.attr("data-id")},
+                        success: function (response) {
+                            window.location.reload();
+                        }
+                    });
+                }
+            });
+</script>
 </body>
 
 </html>
