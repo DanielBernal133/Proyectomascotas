@@ -85,6 +85,7 @@ Route::get('registrar' , 'UserController@create')->name('registrar.form');
 Route::get('login' , 'Auth\LoginController@form')->name('login.form');
 Route::post('login' , 'Auth\LoginController@login')->name('login.verify');
 Route::get('logout' , 'Auth\LoginController@logout')->name('logout.auth');
+Route::get('perfil', 'Auth\LoginController@perfil');
 
 //rutas de envio de correo
 Route::get('confirmar-correo', 'Auth\ResetPasswordController@emailform');
