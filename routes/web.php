@@ -48,6 +48,15 @@ Route::get('empleados/{empleado}/habilitar' , "EmpleadoController@habilitar")->m
 //Rutas get
 
 
+
+//Rutas get
+
+Route::get('Productos/{Producto}/habilitar' , "ProductoController@habilitar");
+
+Route::get('Pedidos/{pedido}/estadopedido', "PedidoController@estadopedido");
+
+Route::get('empleados/{empleado}/habilitar' , "EmpleadoController@habilitar");
+
 //php artisan  make:controller
 //EmpleadoController --resource --model=Empleado
 
@@ -72,6 +81,13 @@ Route::get('/', function (){
     return view('pagina.index');
 })->name('inicio');
 
+Route::get('L', function (){
+    return view('auth.index');
+})->name('inicio');
+
+Route::get('O', function (){
+    return view('auth.terminos');
+})->name('inicio');
 
 
 Route::resource('datoscliente', 'DatosClienteController');
@@ -98,3 +114,19 @@ Route::get('pdfprod', 'PDFControllerProducto@pdf');
 Route::get('pdfclie', 'PDFControllerCliente@pdf');
 Route::get('pdfemple', 'PDFControllerEmpleado@pdf');
 Route::get('pdfpedi', 'PDFControllerPedido@pdf');
+
+//rutas de reset password
+
+Route::get('confirmar-correo' , 'Auth\ResetPasswordController@emailform' )->name('confirmar');
+
+
+Route::post('enviar-link', 'Auth\ResetPasswordController@submitlink')
+->name("send.link");
+
+Route::get('reset-password/{token}' ,
+'Auth\ResetPasswordController@resetform'
+);
+
+Route::post('reset-password' ,
+'Auth\ResetPasswordController@resetpassword'
+)->name('reset.password');

@@ -118,7 +118,11 @@ class PedidoController extends Controller
         $pedido->idEmpleadoFK=$request->input("empleado");
         $pedido->save();
 
+<<<<<<< HEAD
         return redirect('Pedidos')->with('mensaje_exito' , "Pedido actualizado correctamente");
+=======
+        echo "Pedido Actualizado";
+>>>>>>> Camila
 
 
     }

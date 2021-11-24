@@ -1,3 +1,8 @@
+
+@if (session('mensaje'))
+    <center><p>{{ session('mensaje') }}</p></center>
+@endif
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,6 +71,12 @@
                                     </form>
                                     <div class="text-center">
                                         <a class="small" href="{{url ('usuarios/create')}}">¡Crear una Cuenta!</a>
+
+
+                                        <div class="text-center">
+                                        <a class="small" href="{{ url ('confirmar-correo')}}">Restablecer Contraseña</a>
+                                    </div>
+                                    </div>
                                     </div>
                                 </div>
                             </div>

@@ -1597,6 +1597,10 @@
     <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> Camila
     <!-- Swiper Slider JS -->
     <script src="assets/js/plugins/swiper-bundle.min.js"></script>
     <!-- nice select JS -->

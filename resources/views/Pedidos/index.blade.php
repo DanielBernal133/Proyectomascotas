@@ -3,11 +3,15 @@
 @section('contenido')
 <!-- <div class="shadow-lg p-3 mb-5 bg-white rounded"><h3>Contenido de INDEX</h3></div> -->
 <<<<<<< HEAD
+<<<<<<< HEAD
 <center><a href="Pedidos/create" class="btn btn-primary">CREAR PEDIDO</a>
     <a href="{{url ('pdf')}}" class="btn btn-info">PDF</a></center>
 =======
 <center><a href="Pedidos/create" class="btn btn-primary">CREAR PEDIDO</a></center>
 >>>>>>> Daniel
+=======
+<center><a href="Pedidos/create" class="btn btn-primary">CREAR PEDIDO</a></center>
+>>>>>>> Camila
 
 
 <table class="table table-dark table-striped mt-4">

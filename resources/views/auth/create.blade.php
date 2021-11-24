@@ -47,6 +47,7 @@
                                     <div class="col-sm-6">
                                         <input type="text" for="name"class="form-control form-control-user" id="exampleLastName"
                                             placeholder="Apellido"  name="apellido">
+                                            <strong class="text-danger">{{ $errors->first('apellido')}}</strong>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -63,16 +64,35 @@
                                     <div class="col-sm-6">
                                         <input type="password" for="password1"class="form-control form-control-user"
                                             id="exampleRepeatPassword" placeholder="Repita la Contraseña" name="password_confirmation">
+                                            <strong class="text-danger">{{ $errors->first('password')}}</strong>
 
                                     </div>
                                 </div>
+                                <!-- Multiple Checkboxes -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="checkboxes"></label>
+  <div class="ml-2 d-inline-block">
+  <div class="checkbox">
+    <label for="checkboxes-0">
+      <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+      <strong class="text-danger">{{ $errors->first('checkboxes')}}</strong>
+      Acepto <a class=""  href="{{url ('L')}}">términos y condiciones </a>y <a class="" href="{{url ('O')}}">autorizo tratamiento de datos y políticas.</a>
+    </label>
+	</div>
+  </div>
+</div>
+
+
                              <button type="submit" class="btn btn btn-user btn-block">
                                     Registrar cuenta
                              </button>
                             </form>
                             <div class="text-center">
-                                <a class="small" href="{{url ('login')}}">¿Ya tienes una cuenta? Inicie sesión.</a>
+                                <a class="small" href="{{url ('login')}}">¿Ya tienes una cuenta? ¡Ingresa!</a>
                             </div>
+                            <div class="text-center">
+                            <a class="small" href="{{ url ('confirmar-correo')}}">Restablecer Contraseña</a>
+                                    </div>
                         </div>
                     </div>
                 </div>

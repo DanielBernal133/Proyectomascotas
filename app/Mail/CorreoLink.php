@@ -11,9 +11,10 @@ class CorreoLink extends Mailable
 {
     use Queueable, SerializesModels;
 
-    //codigo token
-    public $token='';
 
+
+    //Codigo token
+    public $token='';
     /**
      * Create a new message instance.
      *
@@ -21,6 +22,7 @@ class CorreoLink extends Mailable
      */
     public function __construct($token)
     {
+        //
         $this->token = $token;
     }
 
@@ -31,7 +33,7 @@ class CorreoLink extends Mailable
      */
     public function build()
     {
-        return $this->subject('CAMBIO DE CONTRASEÑA - ROCKSTAR')
-                    ->view('emails.reset-link');
+        return $this->subject('Resete de password')
+        ->view('emails.reset-link');
     }
 }

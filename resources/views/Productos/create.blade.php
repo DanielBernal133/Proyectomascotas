@@ -74,7 +74,7 @@
 
 <div class="col-12">
     <label for="" class="form-label">Imagen</label>
-    <input type="file" name="imagenProducto"  id="imagen"   class="form-control" tabindex="3">
+    <input type="file"name="imagenProducto"  id="imagen"   class="form-control" tabindex="3">
   </div>
 
 

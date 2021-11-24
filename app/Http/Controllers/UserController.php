@@ -45,7 +45,8 @@ class UserController extends Controller
         $usuario->idRolFK=4;
         $usuario->estadoUsuario=1;
         $usuario->save();
-        return redirect("login")->with('mensaje', "Usuario Creado");
+
+        return redirect()->route('login.form')->with('mensaje' , "Usuario Registrado");
 
 
     }

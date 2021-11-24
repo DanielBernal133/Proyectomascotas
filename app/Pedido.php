@@ -36,4 +36,16 @@ protected $primaryKey ="idPedido";
         return $this->belongsto("App\Empleado" , 'idEmpleadoFK');
      }
 
+     public function cliente(){
+        return $this->belongsto("App\Cliente" , 'idClienteFK');
+     }
+
+     public function empleado(){
+        return $this->belongsto("App\Empleado" , 'idEmpleadoFK');
+     }
+
+
+
+
+
 }
