@@ -28,7 +28,7 @@ class LoginController extends Controller
         }
         else{
             //usuario no autenticado
-            return redirect()->route('login.form')->with('mensaje', "Usuario no reconocido");
+            return redirect()->route('login.form')->with('mensajeerror', "Usuario no reconocido");
             }
 
     }
