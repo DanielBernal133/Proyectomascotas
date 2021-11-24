@@ -59,30 +59,60 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-8 d-none d-lg-flex justify-content-center col-custom">
+                    <div class="col-lg-6 d-none d-lg-flex justify-content-center col-custom">
                         <nav class="main-nav d-none d-lg-flex">
                             <ul class="nav">
+                                <li>
+                                    <a href="contact-us.html">
+                                        <span class="menu-text">Inicio</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="contact-us.html">
+                                        <span class="menu-text">Tienda</span>
+                                    </a>
+                                </li>
+                                    <li>
+                                        <a href="contact-us.html">
+                                            <span class="menu-text">Blog</span>
+                                        </a>
+                                    </li>
                                 <li>
                                     <a href="contact-us.html">
                                         <span class="menu-text">Contáctanos</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="{{route('login.form')}}">
-                                        <span class="menu-text"> Iniciar Sesión</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('registrar.form') }}">
-                                        <span class="menu-text">Registrarse</span>
-                                    </a>
-                                </li>
+
+
                             </ul>
                         </nav>
                     </div>
-                    <div class="col-lg-2 col-md-6 col-6 col-custom">
+
+                    <div class="col-lg-3 col-md-8 col-8 col-custom">
                         <div class="header-right-area main-nav">
                             <ul class="nav">
+                                <li class="minicart-wrap">
+                                    <a href="#" class="minicart-btn toolbar-btn">
+
+                                        @if(Auth::user() != null)
+                                        {{Auth::user()->name}}
+                                        @endif
+                                        <i class="fa fa-user">
+                                        </i>
+                                    </a>
+                                    <div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2">
+
+                                        <div class="cart-links d-flex justify-content-between col-md-6 " style="margin:auto;flex-flow: row wrap">
+                                            @if(Auth::user() == null)
+                                            <a class="btn flosun-button secondary-btn rounded-0" href="{{route('login.form')}}">Iniciar Sesión</a>
+                                            <a class="btn flosun-button secondary-btn rounded-0"  href="{{ route('registrar.form') }}">Registrarse</a>
+                                            @else
+                                            <a class="btn flosun-button secondary-btn rounded-0" href="{{url('perfil')}}">Ver perfil</a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </li>
+
                                 <li class="sidemenu-wrap">
                                     <a href="#"><i class="fa fa-search"></i> </a>
                                     <ul class="dropdown-sidemenu dropdown-hover-2 dropdown-search">
@@ -107,6 +137,7 @@
                             </ul>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -320,7 +351,7 @@
                     <!-- Intro Content Start -->
                     <div class="intro11-content text-left">
                         <h2 class="title">Tienda Mascotas</h2>
-                        <p class="desc-content">Compra todo lo que tu mascota se le antoje :D </p>
+                        <p class="desc-content"></p>
                         <a href="{{ route('carrito.shop') }}" class="btn flosun-button secondary-btn theme-color  rounded-0">Comprar ahora</a>
                     </div>
                     <!-- Intro Content End -->

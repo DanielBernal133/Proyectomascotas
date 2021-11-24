@@ -24,7 +24,7 @@ class LoginController extends Controller
         return redirect()->route('Pedidos.index');
 
         }else if(Auth::check() && Auth::user()->idRolFK== '4'){
-            return redirect('carrito');
+            return redirect('/');
         }
         else{
             //usuario no autenticado
@@ -32,11 +32,17 @@ class LoginController extends Controller
             }
 
     }
+
     //accion para cerrar sesion
     public function logout(){
      //metodo logout cierra estado de sesion de usuario
         Auth::logout();
     //redirigir al login
     return redirect()->route('login.form');
+    }
+
+
+    public function perfil(){
+        return view('pagina.my-account');
     }
 }
