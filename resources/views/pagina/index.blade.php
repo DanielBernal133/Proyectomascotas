@@ -83,6 +83,8 @@
                     <div class="col-lg-2 col-md-6 col-6 col-custom">
                         <div class="header-right-area main-nav">
                             <ul class="nav">
+                            
+                                
                                 <li class="sidemenu-wrap">
                                     <a href="#"><i class="fa fa-search"></i> </a>
                                     <ul class="dropdown-sidemenu dropdown-hover-2 dropdown-search">
@@ -94,22 +96,31 @@
                                         </li>
                                     </ul>
                                 </li>
+                                
+                                
                                 <li class="account-menu-wrap d-none d-lg-flex">
                                     <a href="#" class="off-canvas-menu-btn">
                                         <i class="fa fa-bars"></i>
                                     </a>
                                 </li>
+                                
+                                
                                 <li class="mobile-menu-btn d-lg-none">
                                     <a class="off-canvas-btn" href="#">
                                         <i class="fa fa-bars"></i>
                                     </a>
+
                                 </li>
+                                
                             </ul>
+                            
                         </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
+        
         <aside class="off-canvas-wrapper" id="mobileMenu">
             <div class="off-canvas-overlay"></div>
             <div class="off-canvas-inner-content">
@@ -320,7 +331,7 @@
                     <!-- Intro Content Start -->
                     <div class="intro11-content text-left">
                         <h2 class="title">Tienda Mascotas</h2>
-                        <p class="desc-content">Compra todo lo que tu mascota se le antoje :D </p>
+                        <p class="desc-content"></p>
                         <a href="{{ route('carrito.shop') }}" class="btn flosun-button secondary-btn theme-color  rounded-0">Comprar ahora</a>
                     </div>
                     <!-- Intro Content End -->

@@ -63,7 +63,7 @@ Route::resource('usuarios', 'UserController');
 
 //Carrito
 
-Route::get('carrito', 'CarritoController@index')->name('carrito.shop')->middleware('cliente');
+Route::get('carrito', 'CarritoController@index')->name('carrito.shop');
 
 Route::get('add-to-cart/{idpedidProducto}', 'CarritoController@addTocart');
 
@@ -75,6 +75,13 @@ Route::get('/', function (){
     return view('pagina.index');
 })->name('inicio');
 
+Route::get('L', function (){
+    return view('auth.index');
+})->name('inicio');
+
+Route::get('O', function (){
+    return view('auth.terminos');
+})->name('inicio');
 
 
 Route::resource('datoscliente', 'DatosClienteController');
@@ -88,3 +95,20 @@ Route::get('registrar' , 'UserController@create')->name('registrar.form');
 Route::get('login' , 'Auth\LoginController@form')->name('login.form');
 Route::post('login' , 'Auth\LoginController@login')->name('login.verify');
 Route::get('logout' , 'Auth\LoginController@logout')->name('logout.auth');
+
+
+//rutas de reset password
+
+Route::get('confirmar-correo' , 'Auth\ResetPasswordController@emailform' )->name('confirmar');
+
+
+Route::post('enviar-link', 'Auth\ResetPasswordController@submitlink')
+->name("send.link"); 
+
+Route::get('reset-password/{token}' ,
+'Auth\ResetPasswordController@resetform' 
+);
+
+Route::post('reset-password' ,
+'Auth\ResetPasswordController@resetpassword' 
+)->name('reset.password');

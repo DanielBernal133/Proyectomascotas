@@ -46,7 +46,7 @@ class UserController extends Controller
         $usuario->estadoUsuario=1;
         $usuario->save();
 
-        echo "usuario registrado";
+        return redirect()->route('login.form')->with('mensaje' , "Usuario Registrado");
 
 
     }

@@ -80,6 +80,7 @@
                     </div>
                 </div>
             </li>
+            
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
@@ -94,6 +95,7 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>Datos</span></a>
             </li>
+            
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -307,7 +309,7 @@
                                     Resgistro de Actividades
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cerrar Sesion
                                 </a>

@@ -63,7 +63,7 @@ class PedidoController extends Controller
         $nuevopedidos->estadoPedido = 1;
 
         if($nuevopedidos->fechaSolicitud> $nuevopedidos->fechaEnvio&&$nuevopedidos->fechaEntrega){
-            return redirect('Pedidos')->with('mensaje_exito' , "La fecha de solicitud es mas grande a la de entrega y Envio");
+            return redirect('Pedidos')->with('mensaje_exito' , "La fecha de solicitud no puede ser mayor a la de entrega y Envio");
         }else{
             $nuevopedidos->save();
         echo "Pedido Exitoso";

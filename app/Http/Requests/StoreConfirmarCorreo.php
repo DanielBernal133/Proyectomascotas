@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserStoreRequest extends FormRequest
+class StoreConfirmarCorreo extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,15 @@ class UserStoreRequest extends FormRequest
     {
         return [
             'email'=> 'required|email|exists:usuario,email',
-            'password'=> 'required|confirmed',
-            'name'=> 'required|alpha|',
-            'apellido'=> 'required|alpha|',
-            'checkboxes'=>'required',
-
+         
+        ];
+    }
+    
+    public function messages(){
+        return[
+         'required'=>"Campo requerido",
+        
+         'email'=>"Debe ser formato email"
          
         ];
     }

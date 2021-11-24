@@ -25,8 +25,11 @@ class LoginController extends Controller
 
         }else if(Auth::check() && Auth::user()->idRolFK== '4'){
             return redirect('carrito');
-        }
-        else{
+        }else if (Auth::check() && Auth::user()->idRolFK=='2'){
+            return redirect('clientes');
+         } else if (Auth::check() && Auth::user()->idRolFK=='3'){
+                return redirect('Productos');
+        }else{
             //usuario no autenticado
             return redirect()->route('login.form')->with('mensaje', "Usuario no reconocido");
             }
