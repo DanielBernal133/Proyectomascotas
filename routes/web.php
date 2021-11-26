@@ -77,9 +77,7 @@ Route::delete('remove-from-cart', 'CarritoController@remove');
 
 
 //Route pagina
-Route::get('/', function (){
-    return view('pagina.index');
-})->name('inicio');
+Route::get('/', 'pagPrincipalProductos@index')->name('inicio');
 
 Route::get('L', function (){
     return view('auth.index');
