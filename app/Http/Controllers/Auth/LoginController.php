@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Pedido;
 use Illuminate\Support\Facades\DB;
+use App\Empleado;
 
 class LoginController extends Controller
 {
@@ -22,8 +23,11 @@ class LoginController extends Controller
 
       if( Auth::attempt(['email' => $request->input('name'),
         'password' => $request->input('password')]) && Auth::check() && Auth::user()->idRolFK== '1') {
-            //usuario autenticado
-            $enespera = DB::table('pedido')->where('estadoPedido', 'En Espera')->exists();
+            $consulta = DB::table('empleado')->where('idUsuarioFK', Auth::user()->idUsuario)->doesntExist();
+            if($consulta){
+                return redirect('empleados/create');
+            }else{
+                $enespera = DB::table('pedido')->where('estadoPedido', 'En Espera')->exists();
                 if($enespera){
                     //echo "Pedido por validadar";
                     return redirect()->route('Pedidos.index')->with('mensaje' , "Tienes pedidos por confirmar ¡Revise lo pedidos!, tienes entre 24/48 horas para confirmarlos");
@@ -31,13 +35,28 @@ class LoginController extends Controller
                 else{
                     return redirect()->route('Pedidos.index');
                 }
+            }
+            //usuario autenticado
         }else if(Auth::check() && Auth::user()->idRolFK== '4'){
-            return redirect('/');
 
+            return redirect('/');
         }else if ( Auth::check() && Auth::user()->idRolFK== '3'){
-            return redirect()->route('Pedidos.index');
+            $consulta = DB::table('empleado')->where('idUsuarioFK', Auth::user()->idUsuario)->doesntExist();
+            if($consulta){
+                return redirect('empleados/create');
+            }
+            else{
+                return redirect()->route('Pedidos.index');
+            }
+
         }else if ( Auth::check() && Auth::user()->idRolFK== '2'){
-            return redirect()->route('Pedidos.index');
+            $consulta = DB::table('empleado')->where('idUsuarioFK', Auth::user()->idUsuario)->doesntExist();
+            if($consulta){
+                return redirect('empleados/create');
+            }
+            else{
+                return redirect()->route('Pedidos.index');
+            }
         }
         else{
             //usuario no autenticado

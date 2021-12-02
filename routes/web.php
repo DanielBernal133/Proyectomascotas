@@ -20,7 +20,7 @@ Route::resource('Productos', 'ProductoController')->middleware('sesiones');
 
 Route::resource('Pedidos', 'PedidoController');
 
-Route::resource('empleados', 'EmpleadoController')->middleware('sesiones');
+Route::resource('empleados', 'EmpleadoController');
 
 Route::resource('clientes', 'ClienteController')->middleware('sesiones');
 
@@ -35,7 +35,6 @@ Route::resource('Roles', 'RolController')->middleware('sesiones');
 Route::resource('pedidosproductos', 'pedidoDeProductoController');
 
 Route::resource('Marcas', 'MarcaController')->middleware('sesiones');
-
 
 
 //Rutas get

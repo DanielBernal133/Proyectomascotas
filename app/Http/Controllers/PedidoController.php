@@ -115,7 +115,6 @@ class PedidoController extends Controller
         $pedido->fechaEnvio = $request->input("fechaEnvio");
         $pedido->fechaEntrega = $request->input("fechaEntrega");
         $pedido->estadoPedido = $request->input("estadoPedido");
-<<<<<<< HEAD
         $pedido->idEmpleadoFK= Auth::user()->idUsuario;
         $correo = DB::table('pedido')
                             ->join('cliente', 'pedido.idClienteFK', '=', 'cliente.idUsuarioFK')
@@ -131,14 +130,6 @@ class PedidoController extends Controller
             Mail::to($correo)->send(new FechasMail());
             return redirect('Pedidos')->with('mensaje_exito' , "Fechas validadas correctamente");
         }
-=======
-        $pedido->idClienteFK=$request->input("cliente");
-        $pedido->idEmpleadoFK=$request->input("empleado");
-        $pedido->save();
-
-        return redirect('Pedidos')->with('mensaje_exito' , "Pedido actualizado correctamente");
-
->>>>>>> PabloIndex
 
     }
 

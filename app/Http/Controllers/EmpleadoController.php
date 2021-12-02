@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\ValiEmpleado;
+use Illuminate\Support\Facades\Auth;
 
 
 class EmpleadoController extends Controller
@@ -30,7 +31,7 @@ class EmpleadoController extends Controller
     {
         $empleados=Empleado::All();
         $usuario=User::All();
-        return view('empleados.create')->with("empleados", $empleados)->with("usuarios" , $usuario);
+        return view('usuarios.create')->with("empleados", $empleados)->with("usuarios" , $usuario);
     }
 
     /**
@@ -39,13 +40,13 @@ class EmpleadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ValiEmpleado $request)
+    public function store(Request $request)
     {
         $nuevoempleado = new Empleado();
-        $nuevoempleado->nombreEmpleado= $request->input("nombre");
-        $nuevoempleado->precioProducto= $request->input("telefono");
-        $nuevoempleado->estadoEmpleado= $request->input("estado");
-        $nuevoempleado->idUsuarioFK= 9;
+        $nuevoempleado->nombreEmpleado= Auth::user()->name;
+        $nuevoempleado->telefonoEmpleado= $request->input("telefono");
+        $nuevoempleado->estadoEmpleado= 1;
+        $nuevoempleado->idUsuarioFK= Auth::user()->idUsuario;
         $nuevoempleado->save();
         return redirect("empleados")->with('mensaje_exito' , "Empleado exitoso");
     }
