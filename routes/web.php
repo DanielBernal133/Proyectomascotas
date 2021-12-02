@@ -77,9 +77,7 @@ Route::patch('update-cart', 'CarritoController@update');
 
 
 //Route pagina
-Route::get('/', function (){
-    return view('pagina.index');
-})->name('inicio');
+Route::get('/', 'pagPrincipalProductos@index')->name('inicio');
 
 Route::get('L', function (){
     return view('auth.index');

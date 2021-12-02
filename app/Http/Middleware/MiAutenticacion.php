@@ -16,7 +16,7 @@ class MiAutenticacion
      */
     public function handle($request, Closure $next)
     {
-        
+
         //verificar si el usuario esta autenticado
         if(Auth::check()){
         return $next($request);
@@ -24,7 +24,7 @@ class MiAutenticacion
     }else{
         return redirect()->
         route('login.form')->
-        with('mensaje','Usuario no autenticado,Debes Iniciar Sesion ')
+        with('mensaje','Usuario no autenticado,Debes Iniciar Sesion ');
     }
     }
 
