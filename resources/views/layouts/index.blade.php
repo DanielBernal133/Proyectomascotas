@@ -40,7 +40,7 @@
             </a>
 
             <!-- Divider -->
-            
+
             <div class="sidebar-heading">
                 Acciones
             </div>

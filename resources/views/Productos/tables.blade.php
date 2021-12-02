@@ -20,6 +20,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="css/stilos4.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -260,10 +261,26 @@
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }} {{ Auth::user()->apellido }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
+                                    @if (Auth::check() )
+                                    <div class="iniciado">
+                                        <i class="fas fa-circle"></i>
+                                    </div>
+                                    @endif
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    @if (Auth::check() && Auth::user()->idRolFK== '1')
+                                    Administrador
+                                    @endif
+                                    @if (Auth::check() && Auth::user()->idRolFK== '2')
+                                    Gerente
+                                    @endif
+                                    @if (Auth::check() && Auth::user()->idRolFK== '3')
+                                    Secretario
+                                    @endif
+                                </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Perfil

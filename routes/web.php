@@ -49,10 +49,6 @@ Route::get('empleados/{empleado}/habilitar' , "EmpleadoController@habilitar")->m
 
 //Rutas get
 
-
-
-//Rutas get
-
 Route::get('Productos/{Producto}/habilitar' , "ProductoController@habilitar");
 
 Route::get('Pedidos/{pedido}/estadopedido', "PedidoController@estadopedido");

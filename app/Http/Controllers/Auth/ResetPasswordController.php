@@ -9,7 +9,7 @@ use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use App\Mail\CorreoLink;
+use App\Mail\Correo;
 use Illuminate\Support\Facades\Mail;
 use App\User;
 use Illuminate\Support\Facades\Hash;
@@ -47,11 +47,11 @@ class ResetPasswordController extends Controller
     //3. Enviar el correo con el codigo de seguridad
 
   Mail::to($request->input('email'))
-     ->send(new CorreoLink($token));
+     ->send(new Correo($token));
 
 
 
-     return redirect()->route('confirmar')->with('mensaje' , "Correo de verificacion enviado,por favor revise su bandeja de entrada  ");
+     return redirect()->route('confirmar')->with('mensaje' , "Correo de verificacion enviado,por favor revisé spam o bandeja de entrada");
 
     }
 

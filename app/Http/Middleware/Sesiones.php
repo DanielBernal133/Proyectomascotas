@@ -20,7 +20,17 @@ class Sesiones
         if(Auth::check() && Auth::user()->idRolFK== '1'){
             return $next($request);
             return redirect('Pedidos');
-        }else{
+        }else if (Auth::check() && Auth::user()->idRolFK== '4') {
+            return redirect('/');
+
+        }else if ( Auth::check() && Auth::user()->idRolFK== '3'){
+            return $next($request);
+            return redirect('Pedidos');
+        }else if ( Auth::check() && Auth::user()->idRolFK== '2'){
+            return $next($request);
+            return redirect()->route('Pedidos.index');
+        }
+        else{
             return redirect()->route('login.verify')->with('mensajeerror' , "Debes iniciar sesion");
         }
     }
