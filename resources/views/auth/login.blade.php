@@ -37,7 +37,7 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <img class="imagenLogin" src="assets/images/logo/logo.png" alt="">
+                                        <img  class="imagenLogin" src="assets/images/logo/logo.png" alt="">
                                         <h1 class="h4 text-gray-900 mb-4">Inicia Sesión</h1>
                                     </div>
                                     <form class="user"method="POST" action="{{ url('login') }}">
@@ -63,6 +63,9 @@
                                       <button type="submit" class="btn btn btn-user btn-block">
                                     Ingresar
                              </button>
+                             <a  href ="{{ url ( '/' )}}" class="btn btn btn-user btn-block"> Volver</a>
+                                    
+                             
                                     </form>
                                     <div class="text-center">
                                         <a class="small" href="{{url ('usuarios/create')}}">¡Crear una Cuenta!</a>

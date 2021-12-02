@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Pedido;
 use Illuminate\Support\Facades\DB;
 use App\Empleado;
+use App\Cliente;
 
 class LoginController extends Controller
 {
@@ -82,6 +83,11 @@ class LoginController extends Controller
                                      ->select('pedidodeproducto.*', 'pedido.*', 'producto.*')
                                      ->where('idClienteFK', Auth::user()->idUsuario)
                                      ->get();
-        return view('pagina.my-account')->with('detalles' , $producto)->with('detaller' , $nombreproduc);
+        $cliente = Cliente::where('idUsuarioFK' , '=' , Auth::user()->idUsuario)->get();
+        return view('clientesdelavista.tables2')->with('clientes', $cliente)->with('detalles' , $producto)->with('detaller' , $nombreproduc);
+
+
     }
 }
+
+

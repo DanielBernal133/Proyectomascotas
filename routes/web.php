@@ -129,3 +129,13 @@ Route::post('reset-password' ,
 
 
 Route::resource('rolusuario', 'UsuarioController');
+
+//CLIENTES DE LA VISTA
+
+Route::resource('clientesvista', 'ClientesVistaController');
+
+Route:: post('clientesvista/{idUsuario}/cambiarcontraseña' , 'ClientesVistaController@actulizarcontraseña');
+
+
+Route::resource('clientesregistro', 'RegistrarDatosController');
+
