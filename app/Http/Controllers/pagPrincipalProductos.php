@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Producto;
 use Illuminate\Support\Facades\Session;
+use App\Usuario;
 
 class pagPrincipalProductos extends Controller
 {
@@ -14,5 +15,5 @@ class pagPrincipalProductos extends Controller
     }
 
 
-
+    
 }

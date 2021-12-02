@@ -488,7 +488,12 @@
                                             <span class="regular-price ">{{$producto->precioProducto}}</span>
                                             <span class="old-price"><del>{{$producto->precioProducto}}</del></span>
                                         </div>
-                                        <a href="cart.html" class="btn product-cart">Add to Cart</a>
+                                        @if(Auth::check())
+                                                <a class="btn product-cart " href="{{ url('add-to-cart/'.$producto->idProducto) }}">Add to cart</a>
+                                                @else
+                                                <a class="btn product-cart" href="{{route('login.form')}}">Add to cart</a>
+                                                @endif
+
                                     </div>
                                 </div>
                                 <!--Single Product End-->
@@ -579,7 +584,11 @@
                                         <div class="price-box">
                                             <span class="regular-price ">{{$producto->precioProducto}}</span>
                                         </div>
-                                        <a href="cart.html" class="btn product-cart">Add to Cart</a>
+                                        @if(Auth::check())
+                                        <a class="btn product-cart " href="{{ url('add-to-cart/'.$producto->idProducto) }}">Add to cart</a>
+                                        @else
+                                        <a class="btn product-cart" href="{{route('login.form')}}">Add to cart</a>
+                                        @endif
                                     </div>
                                 </div>
                                 <!--Single Product End-->
@@ -903,8 +912,9 @@
                                                     <div class="inc qtybutton"><i class="fa fa-plus"></i></div>
                                                 </div>
                                             </div>
+
                                             <div class="add-to_btn">
-                                                <a class="btn product-cart button-icon flosun-button dark-btn" href="cart.html">Add to cart</a>
+
                                                 <a class="btn flosun-button secondary-btn rounded-0" href="wishlist.html">Add to wishlist</a>
                                             </div>
                                         </div>
