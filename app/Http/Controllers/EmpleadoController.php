@@ -43,7 +43,7 @@ class EmpleadoController extends Controller
     {
         $nuevoempleado = new Empleado();
         $nuevoempleado->nombreEmpleado= $request->input("nombre");
-        $nuevoempleado->telefonoEmpleado= $request->input("telefono");
+        $nuevoempleado->precioProducto= $request->input("telefono");
         $nuevoempleado->estadoEmpleado= $request->input("estado");
         $nuevoempleado->idUsuarioFK= 9;
         $nuevoempleado->save();

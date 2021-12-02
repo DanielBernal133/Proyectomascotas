@@ -63,12 +63,7 @@
                         <nav class="main-nav d-none d-lg-flex">
                             <ul class="nav">
                                 <li>
-                                    <a href="contact-us.html">
-                                        <span class="menu-text">Inicio</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="contact-us.html">
+                                    <a href="{{ route('carrito.shop') }}">
                                         <span class="menu-text">Tienda</span>
                                     </a>
                                 </li>
@@ -1597,10 +1592,6 @@
     <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
-<<<<<<< HEAD
-=======
-
->>>>>>> Camila
     <!-- Swiper Slider JS -->
     <script src="assets/js/plugins/swiper-bundle.min.js"></script>
     <!-- nice select JS -->

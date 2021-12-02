@@ -94,7 +94,6 @@
                                     @if (session('cart'))
                                         @foreach (session('cart') as $idProducto => $detalles)
                                             <?php $total += $detalles['precio'] * $detalles['cantidad'] ?>
-                                            @if (Auth::user()->idUsuario == $detalles['IdCliente'])
                                         <div class="single-cart-item">
                                             <div class="cart-img">
                                                 <a href="cart.html"><img src="assets/images/cart/1.jpg" alt=""></a>
@@ -110,7 +109,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @endif
+
                                         @endforeach
                                         <div class="cart-price-total d-flex justify-content-between">
                                             <h5>Total :</h5>
@@ -386,6 +385,7 @@
                                     <th class="pro-quantity">Cantidad</th>
                                     <th class="pro-subtotal">Total</th>
                                     <th class="pro-remove">Eliminar</th>
+                                    <th class="pro-remove">Actualizar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -393,7 +393,6 @@
                                     @if (session('cart'))
                                         @foreach (session('cart') as $idProducto => $detalles)
                                             <?php $total += $detalles['precio'] * $detalles['cantidad'] ?>
-                                        @if (Auth::user()->idUsuario == $detalles['IdCliente'])
                                     <tr>
                                     <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/images/product/small-size/1.jpg" alt="Product" /></a></td>
                                     <td class="pro-title"><a href="#">{{ $detalles['nombre'] }}</td>
@@ -401,7 +400,7 @@
                                     <td class="pro-quantity">
                                         <div class="quantity">
                                             <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" value="{{ $detalles['cantidad'] }}" type="text">
+                                                <input class="cart-plus-minus-box cantidad" value="{{ $detalles['cantidad'] }}" type="number">
                                                 <div class="dec qtybutton">-</div>
                                                 <div class="inc qtybutton">+</div>
                                                 <div class="dec qtybutton"><i class="fa fa-minus"></i></div>
@@ -411,25 +410,18 @@
                                     </td>
                                     <td class="pro-subtotal"><span>{{ $detalles['precio'] * $detalles['cantidad'] }}</span></td>
                                     <td class="pro-remove"><a class="remove-from-cart" data-id="{{ $idProducto }}"><i class="lnr lnr-trash"></i></a></td>
+                                    <td class="pro-remove">
+                                            <div class="cart-update mt-sm-16">
+                                                <a href="#" data-id="{{ $idProducto }}" class="btn flosun-button primary-btn rounded-0 black-btn update-cart">Actualizar</a>
+                                            </div>
+                                    </td>
                                 </tr>
-                                @endif
                                 @endforeach
                                 @endif
                             </tbody>
                         </table>
                     </div>
                     <!-- Cart Update Option -->
-                    <div class="cart-update-option d-block d-md-flex justify-content-between">
-                        <div class="apply-coupon-wrapper">
-                            <form action="#" method="post" class=" d-block d-md-flex">
-                                <input type="text" placeholder="Enter Your Coupon Code" required />
-                                <button class="btn flosun-button primary-btn rounded-0 black-btn">Apply Coupon</button>
-                            </form>
-                        </div>
-                        <div class="cart-update mt-sm-16">
-                            <a href="#" class="btn flosun-button primary-btn rounded-0 black-btn">Update Cart</a>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="row">
@@ -437,25 +429,27 @@
                     <!-- Cart Calculation Area -->
                     <div class="cart-calculator-wrapper">
                         <div class="cart-calculate-items">
-                            <h3>Cart Totals</h3>
+                            <h3>Total Carrito</h3>
                             <div class="table-responsive">
                                 <table class="table">
-                                    <tr>
-                                        <td>Sub Total</td>
-                                        <td>$230</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Shipping</td>
-                                        <td>$70</td>
-                                    </tr>
                                     <tr class="total">
                                         <td>Total</td>
-                                        <td class="total-amount">$300</td>
+                                        <td class="total-amount">${{ $total }}</td>
                                     </tr>
                                 </table>
                             </div>
                         </div>
-                        <a href="checkout.html" class="btn flosun-button primary-btn rounded-0 black-btn w-100">Proceed To Checkout</a>
+                        <form method="POST" action="{{ url('Pedidos') }}">
+                            @csrf
+                                <?php
+                                $cart = session()->get('cart');
+                                ?>
+                                @if ($cart == null)
+                                    <center><p><strong>No tienes productos en el carrito </strong></p></center>
+                                @else
+                                    <button type="submit" class="btn flosun-button primary-btn rounded-0 black-btn w-100">Hacer pedido</button>
+                                @endif
+                        </form>
                     </div>
                 </div>
             </div>
@@ -534,6 +528,20 @@
                     });
                 }
             });
+</script>
+<script>
+    $(".update-cart").click(function (e) {
+           e.preventDefault();
+           var ele = $(this);
+            $.ajax({
+               url: '{{ url('update-cart') }}',
+               method: "patch",
+               data: {_token: '{{ csrf_token() }}', idProducto: ele.attr("data-id"), cantidad: ele.parents("tr").find(".cantidad").val()},
+               success: function (response) {
+                   window.location.reload();
+               }
+            });
+        });
 </script>
 </body>
 

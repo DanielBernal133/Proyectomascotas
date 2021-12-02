@@ -42,68 +42,31 @@
             </a>
 
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+            
+            <div class="sidebar-heading">
+                Acciones
+            </div>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                <a class="nav-link" href="{{url('Productos')}}">
+                    <i class="fab fa-product-hunt"></i>
+                    <span>Productos</span></a>
             </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
+                <a class="nav-link" href="{{url('empleados')}}">
+                    <i class="far fa-address-card"></i>
+                    <span>Empleados</span></a>
             </li>
-
-            <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                <a class="nav-link" href="{{url('clientes')}}">
+                    <i class="fas fa-users"></i>
+                    <span>Clientes</span></a>
             </li>
-
-            <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tablas</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Tablas Admin:</h6>
-                        <a class="collapse-item" href="{{url('Productos')}}">Productos</a>
-                        <a class="collapse-item" href="{{url('empleados')}}">Empleados</a>
-                        <a class="collapse-item" href="{{url('clientes')}}">Clientes</a>
-                        <a class="collapse-item" href="{{url('usuarios2')}}">Usuarios</a>
-
-                    </div>
-                </div>
+                <a class="nav-link" href="{{url('rolusuario')}}">
+                    <i class="far fa-user-circle"></i>
+                    <span>Usuarios</span></a>
             </li>
 
             <!-- Divider -->
@@ -344,9 +307,10 @@
                                           <th >Fecha Envío</th>
                                           <th >Fecha Entrega</th>
                                           <th>Cliente</th>
-                                          <th>Empleado</th>
-                                          <th >Actualizar</th>
+                                          {{-- <th>Empleado</th> --}}
                                           <th >Estado Pedido</th>
+                                          <th >Acciones</th>
+                                          
                                         </tr>
                                       </thead>
                                     <tfoot>
@@ -356,30 +320,52 @@
                                             <th >Fecha Envío</th>
                                             <th >Fecha Entrega</th>
                                             <th>Cliente</th>
-                                            <th>Empleado</th>
-                                            <th >Actualizar</th>
+                                            {{-- <th>Empleado</th> --}}
                                             <th >Estado Pedido</th>
+                                            <th >Acciones</th>
+                                            
                                           </tr>
                                     </tfoot>
                                     <tbody>
-                                        @foreach ($Pedidos as $pedido)
+                                        @foreach ($nombreclientes as $nombre)
                                         <tr>
-                                            <td>{{$pedido->idPedido}}</td>
-                                            <td>{{$pedido->fechaSolicitud}}</td>
-                                            <td>{{$pedido->fechaEnvio}}</td>
-                                            <td>{{$pedido->fechaEntrega}}</td>
-                                            <td>{{$pedido->cliente()->first()->nombreCliente}}</td>
-                                            <th>{{$pedido->empleado()->first()->nombreEmpleado}}</th>
-
-
-
+                                            <td>{{$nombre->idPedido}}</td>
+                                            <td>{{$nombre->fechaSolicitud}}</td>
                                             <td>
-
-                                                <a href="{{url ('Pedidos/' . $pedido->idPedido . "/edit") }}" class="btn btn-info">Editar</a>
-                                                  @method('')
-                                                  @csrf
-                                             </form>
-                                             <td>
+                                                @if ($nombre->fechaEnvio == null)
+                                                    <p style="color: red">Fechas aún por validar</p>
+                                                @else
+                                                    {{$nombre->fechaEnvio}}
+                                                @endif
+                                            </td>
+                                                <td>
+                                                    @if ($nombre->fechaEnvio == null)
+                                                        <p style="color: red">Fechas aún por validar</p>
+                                                    @else
+                                                        {{$nombre->fechaEntrega}}
+                                                    @endif
+                                                </td>
+                                            <td>
+                                                {{$nombre->nombreCliente}}
+                                            </td>
+                                            {{-- <td>
+                                                @if ($nombre->nombreEmpleado == null)
+                                                <p style="color: red">Usuario por editar</p>
+                                                @else
+                                                    {{$nombre->nombreEmpleado}}
+                                                @endif
+                                            </td> --}}
+                                            <td>
+                                                {{$nombre->estadoPedido}}
+                                            </td>
+                                            <td>
+                                                @if ($nombre->fechaEnvio == null)
+                                                    <a href="{{url ('Pedidos/' . $nombre->idPedido . "/edit") }}" class="btn btn-info">Asignar fecha</a>
+                                                @else
+                                                    <p style="color: green"><strong>Fechas validadas</strong></p>
+                                                @endif
+                                            </td>
+                                             {{-- <td>
                                                 @switch($pedido->estadoPedido)
                                                     @case( null )
                                                     <a href="{{ url ('Pedidos/' . $pedido->idPedido . "/estadopedido" ) }}">
@@ -400,9 +386,9 @@
                                                     @break
 
                                                 @endswitch
-                                            </td>
-                                            </td>
+                                            </td> --}}
                                         </tr>
+
                                         @endforeach
                                       </tbody>
                                 </table>
@@ -470,6 +456,7 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+    <script src="js/main2.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> --}}
     @if ( session("mensaje_exito"))
@@ -478,6 +465,20 @@
         </script>
     {{-- <div>{{ session("mensaje_exito") }} </div> --}}
     @endif
+
+    @if ( session("mensaje"))
+    <script>
+        swal("¡Atención!", "{{ session('mensaje') }}", "warning");
+    </script>
+{{-- <div>{{ session("mensaje_exito") }} </div> --}}
+@endif
+
+@if ( session("mensajeerror"))
+<script>
+    swal("¡Atención!", "{{ session('mensajeerror') }}", "warning");
+</script>
+{{-- <div>{{ session("mensaje_exito") }} </div> --}}
+@endif
 </body>
 
 </html>

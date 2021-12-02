@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Usuario;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        return view('usuarios.tables')->with('usuarios' , Usuario::all());
+        return view('usuarios.tables')->with('rolusuario' , Usuario::paginate(10));
     }
 
     /**
@@ -55,9 +56,9 @@ class UsuarioController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function edit(Usuario $usuario)
+    public function edit(Usuario $rolusuario)
     {
-       return view('usuarios.edit')->with('usuario' , $usuario);
+       return view('usuarios.edit')->with('rolusuario' , $rolusuario);
     }
 
     /**
@@ -67,11 +68,12 @@ class UsuarioController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(Request $request, /*Usuario*/ $usuario)
     {
+        $usuario = Usuario::find($usuario);
         $usuario->idRolFK= $request->input('rol');
         $usuario->save();
-        echo "Rol cambiado";
+        return redirect("rolusuario")->with('mensaje_exito' , "Rol Asignado correctamente");
     }
 
     /**

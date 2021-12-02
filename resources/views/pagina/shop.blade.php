@@ -54,7 +54,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-2 col-xl-2 col-md-6 col-6 col-custom">
                         <div class="header-logo d-flex align-items-center">
-                            <a href="index.html">
+                            <a href="{{ url('/') }}">
                                 <img class="img-full" src="assets/images/logo/logo.png" alt="Header Logo">
                             </a>
                         </div>
@@ -63,21 +63,38 @@
                         <nav class="main-nav d-none d-lg-flex">
                             <ul class="nav">
                                 <li>
-                                    <a href="contact-us.html">
-                                        <span class="menu-text">Contáctanos</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{route('logout.auth')}}">
-                                        <span class="menu-text">Cerrar Sesión</span>
+                                    <a href="{{ url('/') }}">
+                                        <span class="menu-text">Inicio</span>
                                     </a>
                                 </li>
                             </ul>
                         </nav>
                     </div>
+
                     <div class="col-lg-2 col-md-6 col-6 col-custom">
                         <div class="header-right-area main-nav">
                             <ul class="nav">
+                                <li class="sidemenu-wrap">
+                                    <a href="#" class="minicart-btn toolbar-btn">
+
+                                        @if(Auth::user() != null)
+                                        {{Auth::user()->name}}
+                                        @endif
+                                        <i class="fa fa-user">
+                                        </i>
+                                    </a>
+                                    <div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2">
+
+                                        <div class="cart-links d-flex justify-content-between col-md-6 " style="margin:auto;flex-flow: row wrap">
+                                            @if(Auth::user() == null)
+                                            <a class="btn flosun-button secondary-btn rounded-0" href="{{route('login.form')}}">Iniciar Sesión</a>
+                                            <a class="btn flosun-button secondary-btn rounded-0"  href="{{ route('registrar.form') }}">Registrarse</a>
+                                            @else
+                                            <a class="btn flosun-button secondary-btn rounded-0" href="{{url('perfil')}}">Ver perfil</a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </li>
                                 <li class="minicart-wrap">
                                     <a href="#" class="minicart-btn toolbar-btn">
                                         <i class="fa fa-shopping-cart"></i>
@@ -88,7 +105,6 @@
                                     @if (session('cart'))
                                         @foreach (session('cart') as $idProducto => $detalles)
                                             <?php $total += $detalles['precio'] * $detalles['cantidad'] ?>
-                                            @if (Auth::user()->idUsuario == $detalles['IdCliente'])
                                         <div class="single-cart-item">
                                             <div class="cart-img">
                                                 <a href="cart.html"><img src="assets/images/cart/1.jpg" alt=""></a>
@@ -104,7 +120,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @endif
                                         @endforeach
                                         <div class="cart-price-total d-flex justify-content-between">
                                             <h5>Total :</h5>
@@ -116,17 +131,6 @@
                                         </div>
 
                                     </div>
-                                </li>
-                                <li class="sidemenu-wrap">
-                                    <a href="#"><i class="fa fa-search"></i> </a>
-                                    <ul class="dropdown-sidemenu dropdown-hover-2 dropdown-search">
-                                        <li>
-                                            <form action="#">
-                                                <input name="search" id="search" placeholder="Search" type="text">
-                                                <button type="submit"><i class="fa fa-search"></i></button>
-                                            </form>
-                                        </li>
-                                    </ul>
                                 </li>
                                 <li class="account-menu-wrap d-none d-lg-flex">
                                     <a href="#" class="off-canvas-menu-btn">
@@ -355,7 +359,7 @@
                     <div class="breadcrumb-content position-relative section-content">
                         <h3 class="title-3">Carrito Woofmate</h3>
                         <ul>
-                            <li><a href="index.html">Inicio</a></li>
+                            <li><a href="{{ url('/') }}">Inicio</a></li>
                             <li>Tienda</li>
                         </ul>
                     </div>

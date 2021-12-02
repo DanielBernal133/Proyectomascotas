@@ -31,7 +31,7 @@ class CarritoController extends Controller
                         "cantidad" => 1,
                         "nombre"=>$producto->nombreProducto,
                         "precio" => $producto->precioProducto,
-                        "IdCliente" => Auth::user()->idUsuario
+                        "IdProducto" => $producto->idProducto
                     ]
             ];
             session()->put('cart', $cart);
@@ -43,10 +43,10 @@ class CarritoController extends Controller
             return redirect('carrito')->with('mensaje_exito', "Cantidad agregada del producto exitosamente");
         }else {
             $cart[$idProducto] = [
-                "nombre"=>$producto->nombreProducto,
                 "cantidad" => 1,
+                "nombre"=>$producto->nombreProducto,
                 "precio" => $producto->precioProducto,
-                "IdCliente" => Auth::user()->idUsuario
+                "IdProducto" => $producto->idProducto
             ];
             session()->put('cart', $cart);
             return redirect('carrito')->with('mensaje_exito', "Producto añadido al carrito");
@@ -62,6 +62,17 @@ class CarritoController extends Controller
                 session()->put('cart', $cart);
             }
             echo "Producto removido";
+        }
+    }
+
+    public function update(Request $request)
+    {
+        if($request->idProducto and $request->cantidad)
+        {
+            $cart = session()->get('cart');
+            $cart[$request->idProducto]["cantidad"] = $request->cantidad;
+            session()->put('cart', $cart);
+            echo "Producto actualizado";
         }
     }
 }

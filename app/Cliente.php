@@ -15,6 +15,6 @@ class Cliente extends Model
 
     public function Usuarios(){
 
-        return $this-> hasMany('App\User', 'idUsuarioFK' );
+        return $this->hasMany('App\User', 'idUsuarioFK' );
     }
 }

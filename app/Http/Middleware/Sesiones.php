@@ -20,10 +20,7 @@ class Sesiones
         if(Auth::check() && Auth::user()->idRolFK== '1'){
             return $next($request);
             return redirect('Pedidos');
-        }else if (Auth::check() && Auth::user()->idRolFK== '4') {
-            return redirect('carrito');
-        }
-        else{
+        }else{
             return redirect()->route('login.verify')->with('mensajeerror' , "Debes iniciar sesion");
         }
     }

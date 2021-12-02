@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Pedido;
 use App\pedidoDeProducto;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class pedidoDeProductoController extends Controller
@@ -25,7 +26,7 @@ class pedidoDeProductoController extends Controller
      */
     public function create()
     {
-        //
+        // return view('carrito.pedido');
     }
 
     /**
@@ -36,7 +37,15 @@ class pedidoDeProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $pedidonuevo = new pedidoDeProducto();
+        // $pedidonuevo->cantidadProducto= $request->input("cantidad");
+        // $pedidonuevo->precioProducto= $request->input("precio");
+        // $pedidonuevo->idProductoFK= $request->input("IdProducto");
+        // $pedidonuevo->idPedidoFK= 10;
+        // $pedidonuevo->save();
+        // echo "guardado";
+        // $cart = session()->get('cart');
+        // Session::flush($cart);
     }
 
     /**

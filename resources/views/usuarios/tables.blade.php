@@ -21,6 +21,7 @@
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.css" rel="stylesheet">
     <link href="css/stilos4.css" rel="stylesheet">
+    <link href="css/modal.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -31,8 +32,6 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-
-        <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
@@ -43,69 +42,32 @@
             </a>
 
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+            
+            <div class="sidebar-heading">
+                Acciones
+            </div>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                <a class="nav-link" href="{{url('Pedidos')}}">
+                    <i class="fab fa-product-hunt"></i>
+                    <span>Pedidos</span></a>
             </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
+                <a class="nav-link" href="{{url('Productos')}}">
+                    <i class="fab fa-product-hunt"></i>
+                    <span>Productos</span></a>
             </li>
-
-            <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                <a class="nav-link" href="{{url('empleados')}}">
+                    <i class="far fa-address-card"></i>
+                    <span>Empleados</span></a>
             </li>
-
-            <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tablas</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Tablas Admin:</h6>
-                        <a class="collapse-item" href="{{url('Productos')}}">Productos</a>
-                        <a class="collapse-item" href="{{url('empleados')}}">Empleados</a>
-                        <a class="collapse-item" href="{{url('clientes')}}">Clientes</a>
-
-                    </div>
-                </div>
+                <a class="nav-link" href="{{url('clientes')}}">
+                    <i class="fas fa-users"></i>
+                    <span>Clientes</span></a>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -375,7 +337,7 @@
                                           </tr>
                                     </tfoot>
                                     <tbody>
-                                        @foreach ($usuarios as $usuario)
+                                        @foreach ($rolusuario as $usuario)
                                         <tr>
                                             <td>{{$usuario->idUsuario}}</td>
                                             <td>{{$usuario->name}}</td>
@@ -383,13 +345,17 @@
                                             <td>{{$usuario->email}}</td>
                                             <td>{{$usuario->Rol()->first()->rol}}</td>
                                             <td>
-                                                <a href="{{url ('usuarios2/' . $usuario->idUsuario . "/edit") }}" class="btn btn-info">Asignar rol</a>
+                                                <a href="{{url ('rolusuario/' . $usuario->idUsuario . "/edit") }}" class="btn btn-info">Asignar rol</a>
                                             </td>
-
                                         </tr>
                                         @endforeach
-                                      </tbody>
+                                    </tbody>
                                 </table>
+                                {{ $rolusuario->links() }}
+                            </div>
+                        </div>
+                    </div>
+
                 <!-- /.container-fluid -->
 
             </div>
@@ -416,25 +382,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -452,7 +399,17 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
-
+    <script src="js/main2.js"></script>
+    {{-- <script src="js/logica.js"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    @if ( session("mensaje_exito"))
+        <script>
+            swal("Trabajo echo" , "{{ session('mensaje_exito') }}" , "success", {
+                button: "OK",
+            });
+        </script>
+    {{-- <div>{{ session("mensaje_exito") }} </div> --}}
+    @endif
 </body>
 
 </html>

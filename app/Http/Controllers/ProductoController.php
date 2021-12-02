@@ -47,11 +47,7 @@ class ProductoController extends Controller
     {
 
         $maxproducto=Producto::all()->max('idProdcuto');
-
         $nuevoproductos = new Producto();
-
-
-
         $nuevoproductos->nombreProducto=$request->input("nombre");
         $nuevoproductos->descripcionProducto=$request->input("descripcion");
         $nuevoproductos->cantidadProducto=$request->input("cantidad");
@@ -120,7 +116,7 @@ class ProductoController extends Controller
 
 
 
-         $producto = Producto::find($producto);
+        $producto = Producto::find($producto);
         $producto->nombreProducto = $request->input('nombre');
         $producto->descripcionProducto = $request->input('descripcion');
         $producto->cantidadProducto = $request->input('cantidad');

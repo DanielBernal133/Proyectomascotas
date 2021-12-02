@@ -1,7 +1,7 @@
-@extends('layouts.plantillabase')
+@extends('layouts.index')
 
-@section('contenido')
-<h2 ><center>CREAR PRODUCTOS</center></h2>
+@section('contenedor')
+<h4 ><center>CREAR PRODUCTOS</center></h4>
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -31,69 +31,40 @@
     {{ $errors->first("precio") }}
   </div>
 
-
-
-
-
-
-
-
-
-
-
-  <div class="col-md-6">
-    <label for="" class="form-label">Estado Producto</label>
-    <input id="textinput" name="producto" type="number"   class="form-control" tabindex="3">
-  </div>
-
-
-  <div class="col-md-6">
-  <label for="" class="form-label">Categoria</label>
-  <select name="categoria" class="form-select" aria-label="Default select example">>
-    @foreach($categorias as $categoria)
-    <option  value={{ $categoria->idCategoria }}>
-        {{ $categoria->nombreCategoria }}    </option>
-    @endforeach
-  </select>
-  {{ $errors->first("categoria") }}
-  </div>
-
-
-  <div class="col-md-6">
-    <label for="" class="form-label">Marca</label>
-    <select name="marca" class="form-select" aria-label="Default select example">>
-      @foreach($marcas as $marca)
-      <option  value={{ $marca->idMarca }}>
-          {{ $marca->nombreMarca }}    </option>
-      @endforeach
-    </select>
-    {{ $errors->first("marca") }}
+  <div style="margin:10px">
+    <label for="selectbasic">Categoria Producto</label>
+    <div>
+      <select name="categoria" class="form-control">
+        @foreach($categorias as $categoria)
+        <option  value={{ $categoria->idCategoria }}>
+            {{ $categoria->nombreCategoria }}    </option>
+        @endforeach
+      </select>
+      {{ $errors->first("categoria") }}
     </div>
+  </div>
 
-
-
+<div style="margin:10px">
+        <label for="selectbasic">Marca producto</label>
+        <div>
+          <select name="marca" class="form-control">
+            @foreach($marcas as $marca)
+                <option  value={{ $marca->idMarca }}>
+                    {{ $marca->nombreMarca }}    </option>
+            @endforeach
+          </select>
+          {{ $errors->first("marca") }}
+        </div>
+      </div>
 <div class="col-12">
     <label for="" class="form-label">Imagen</label>
     <input type="file"name="imagenProducto"  id="imagen"   class="form-control" tabindex="3">
   </div>
-
-
-
-
-
-<div class="col-6">
-
+<div style="margin: 20px;" class="col-6">
   <a href="/Productos" class="btn btn-secondary" tabindex="5">Cancelar</a>
   <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
 </div>
-
-
-
-
 </form>
-
-
-
 @endsection
 
 

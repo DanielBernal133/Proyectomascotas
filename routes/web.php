@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('Productos', 'ProductoController')->middleware('sesiones');
 
-Route::resource('Pedidos', 'PedidoController')->middleware('sesiones');
+Route::resource('Pedidos', 'PedidoController');
 
 Route::resource('empleados', 'EmpleadoController')->middleware('sesiones');
 
@@ -31,9 +32,10 @@ Route::resource('Tipos', 'TipoController')->middleware('sesiones');
 
 Route::resource('Roles', 'RolController')->middleware('sesiones');
 
-Route::resource('PedidosProductos', 'pedidoDeProductoController')->middleware('sesiones');
+Route::resource('pedidosproductos', 'pedidoDeProductoController');
 
 Route::resource('Marcas', 'MarcaController')->middleware('sesiones');
+
 
 
 //Rutas get
@@ -75,6 +77,8 @@ Route::get('cart' , 'CarritoController@cart')->name('cart.view')->middleware('se
 
 Route::delete('remove-from-cart', 'CarritoController@remove');
 
+Route::patch('update-cart', 'CarritoController@update');
+
 
 //Route pagina
 Route::get('/', function (){
@@ -94,7 +98,6 @@ Route::resource('datoscliente', 'DatosClienteController');
 
 
 Route::resource('usuarios', 'UserController');
-Route::resource('usuarios2', 'UsuarioController');
 Route::get('registrar' , 'UserController@create')->name('registrar.form');
 
 //Rutas de autenticacion
@@ -130,3 +133,6 @@ Route::get('reset-password/{token}' ,
 Route::post('reset-password' ,
 'Auth\ResetPasswordController@resetpassword'
 )->name('reset.password');
+
+
+Route::resource('rolusuario', 'UsuarioController');

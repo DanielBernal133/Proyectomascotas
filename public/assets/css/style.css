@@ -6101,12 +6101,12 @@ mark {
 }
 
 .flosun-button.primary-btn:hover {
-  background-color: #000000;
+  background-color: #9CDABB;
 }
 
 .flosun-button.secondary-btn {
   position: relative;
-  background: #000000;
+  background: #9CDABB;
   color: #ffffff;
   z-index: 1;
 }
@@ -6137,13 +6137,13 @@ mark {
 }
 
 .flosun-button.secondary-btn.theme-color:after {
-  background: #000000;
+  background: #9CDABB;
 }
 
 .flosun-button.secondary-btn.secondary-border {
-  border: 2px solid #000000;
+  border: 2px solid #9CDABB;
   background: transparent;
-  color: #000000;
+  color: #9CDABB;
   line-height: 42px;
 }
 

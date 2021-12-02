@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreCliente;
 use App\Usuario;
+use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
 {
@@ -62,12 +63,12 @@ class ClienteController extends Controller
 
         //crear el nuevo recurso cliente
         $nuevocliente = new Cliente();
-        $nuevocliente->nombreCliente = $request->input("nombre");
-        $nuevocliente->apellidoCliente = $request->input("apellido");
+        $nuevocliente->nombreCliente = Auth::user()->nombre;
+        $nuevocliente->apellidoCliente = Auth::user()->apellido;
         $nuevocliente->direccionCliente = $request->input("direccion");
         $nuevocliente->telefonoCliente = $request->input("telefono");
         $nuevocliente->estadoCliente = $request->input("estado");
-        $nuevocliente->idUsuarioFK = $request->input("usuario");
+        $nuevocliente->idUsuarioFK = Auth::user()->idUsuario;
         $nuevocliente->save();
 
         //redireccionar a la ruta deseada

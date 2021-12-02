@@ -1,8 +1,3 @@
-
-@if (session('mensaje'))
-    <center><p>{{ session('mensaje') }}</p></center>
-@endif
-
 <!DOCTYPE html>
 <html lang="en">
 

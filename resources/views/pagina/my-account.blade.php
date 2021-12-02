@@ -9,29 +9,29 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico')}}">
 
     <!-- CSS
 	============================================ -->
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/vendor/bootstrap.min.css')}}">
     <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="assets/css/vendor/font.awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/vendor/font.awesome.min.css')}}">
     <!-- Linear Icons CSS -->
-    <link rel="stylesheet" href="assets/css/vendor/linearicons.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/vendor/linearicons.min.css')}}">
     <!-- Swiper CSS -->
-    <link rel="stylesheet" href="assets/css/plugins/swiper-bundle.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/swiper-bundle.min.css')}}">
     <!-- Animation CSS -->
-    <link rel="stylesheet" href="assets/css/plugins/animate.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/animate.min.css')}}">
     <!-- Jquery ui CSS -->
-    <link rel="stylesheet" href="assets/css/plugins/jquery-ui.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/jquery-ui.min.css')}}">
     <!-- Nice Select CSS -->
-    <link rel="stylesheet" href="assets/css/plugins/nice-select.min.css">
+    <link rel="stylesheet" href="{{('assets/css/plugins/nice-select.min.css')}}">
     <!-- Magnific Popup -->
-    <link rel="stylesheet" href="assets/css/plugins/magnific-popup.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/magnific-popup.css')}}">
 
     <!-- Main Style CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
 
 </head>
 
@@ -54,8 +54,8 @@
                 <div class="row align-items-center">
                     <div class="col-lg-2 col-xl-2 col-md-6 col-6 col-custom">
                         <div class="header-logo d-flex align-items-center">
-                            <a href="index.html">
-                                <img class="img-full" src="assets/images/logo/logo.png" alt="Header Logo">
+                            <a href="{{ url('/') }}">
+                                <img class="img-full" src="{{ asset('assets/images/logo/logo.png')}}" alt="Header Logo">
                             </a>
                         </div>
                     </div>
@@ -63,12 +63,12 @@
                         <nav class="main-nav d-none d-lg-flex">
                             <ul class="nav">
                                 <li>
-                                    <a href="contact-us.html">
+                                    <a href="{{ url('/') }}">
                                         <span class="menu-text">Inicio</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="contact-us.html">
+                                    <a href="{{ route('carrito.shop') }}">
                                         <span class="menu-text">Tienda</span>
                                     </a>
                                 </li>
@@ -82,8 +82,6 @@
                                         <span class="menu-text">Contáctanos</span>
                                     </a>
                                 </li>
-
-
                             </ul>
                         </nav>
                     </div>
@@ -101,7 +99,6 @@
                                         </i>
                                     </a>
                                     <div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2">
-
                                         <div class="cart-links d-flex justify-content-between col-md-6 " style="margin:auto;flex-flow: row wrap">
                                             <a class="btn flosun-button secondary-btn rounded-0" href="{{url('logout')}}">Cerrar Sesión</a>
                                         </div>
@@ -441,7 +438,7 @@
                                 <div class="tab-content" id="myaccountContent">
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
-                                        <div class="myaccount-content">
+                                         <div class="myaccount-content">
                                             <h3>Información de tu cuenta</h3>
                                             <center><div class="col-lg-6 col-custom">
                                                 <div class="single-input-item mb-3">
@@ -460,7 +457,6 @@
                                                 </address>
                                                 <a href="#" class="btn flosun-button secondary-btn theme-color  rounded-0"><i class="fa fa-edit mr-2"></i>Editar Dirección</a>
                                             </div></center>
-
                                         </div>
                                     </div>
                                     <!-- Single Tab Content End -->
@@ -470,43 +466,57 @@
                                         <div class="myaccount-content">
                                             <h3>Historial de pedidos</h3>
                                             <div class="myaccount-table table-responsive text-center">
+
                                                 <table class="table table-bordered">
                                                     <thead class="thead-light">
                                                         <tr>
-                                                            <th>Orden</th>
-                                                            <th>Día</th>
-                                                            <th>Estado</th>
-                                                            <th>Total</th>
-                                                            <th>Acción</th>
+                                                            <th>Fecha Solicitud</th>
+                                                            <th>Fecha Envio</th>
+                                                            <th>Fecha Entrega</th>
+                                                            <th>Estado Entrega</th>
+                                                            <th>Nombre Producto</th>
+                                                            <th>Acciones</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        @foreach ($detalles as $detalle)
+                                                        @foreach ($detaller as $detall)
                                                         <tr>
-                                                            <td>1</td>
-                                                            <td>10/09/2021</td>
-                                                            <td>Pendiente</td>
-                                                            <td>$3000</td>
-                                                            <td><a href="cart.html" class="btn flosun-button secondary-btn theme-color  rounded-0">Ver</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>15/09/2021</td>
-                                                            <td>Aprovado</td>
-                                                            <td>$20000</td>
-                                                            <td><a href="cart.html" class="btn flosun-button secondary-btn theme-color  rounded-0">Ver</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>18/07/2021</td>
-                                                            <td>En espera</td>
-                                                            <td>$55000</td>
+
+                                                            <td>
+                                                                @if ($detalle->fechaSolicitud == null)
+                                                                    <p style="color:red;">Fecha aun por validar</p>
+                                                                @else
+                                                                    {{$detalle->fechaSolicitud }}
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if ($detalle->fechaEnvio == null)
+                                                                <p style="color:red;">Fecha aun por validar</p>
+                                                                @else
+                                                                    {{$detalle->fechaEnvio }}
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if ($detalle->fechaEntrega == null)
+                                                                <p style="color:red;">Fecha aun por validar</p>
+                                                                @else
+                                                                    {{$detalle->fechaEntrega }}
+                                                                @endif
+                                                            </td>
+                                                            <td>{{$detalle->estadoPedido}}</td>
+                                                            <td>{{$detall->nombreProducto}}</td>
                                                             <td><a href="cart.html" class="btn flosun-button secondary-btn theme-color  rounded-0">Ver</a></td>
                                                         </tr>
                                                     </tbody>
+                                                    @endforeach
+                                                @endforeach
                                                 </table>
+
                                             </div>
                                         </div>
-                                    </div>
+                                        </div>
+
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
@@ -657,27 +667,27 @@
 ============================================ -->
 
     <!-- Modernizer JS -->
-    <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
+    <script src="{{ asset('assets/js/vendor/modernizr-3.7.1.min.js')}}"></script>
     <!-- jQuery JS -->
-    <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
+    <script src="{{ asset('assets/js/vendor/jquery-3.5.1.min.js')}}"></script>
     <!-- Bootstrap JS -->
-    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/js/vendor/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Swiper Slider JS -->
-    <script src="assets/js/plugins/swiper-bundle.min.js"></script>
+    <script src="{{ asset('assets/js/plugins/swiper-bundle.min.js')}}"></script>
     <!-- nice select JS -->
-    <script src="assets/js/plugins/nice-select.min.js"></script>
+    <script src="{{ asset('assets/js/plugins/nice-select.min.j')}}s"></script>
     <!-- Ajaxchimpt js -->
-    <script src="assets/js/plugins/jquery.ajaxchimp.min.js"></script>
+    <script src="{{ asset('assets/js/plugins/jquery.ajaxchimp.min.j')}}s"></script>
     <!-- Jquery Ui js -->
-    <script src="assets/js/plugins/jquery-ui.min.js"></script>
+    <script src="{{ asset('assets/js/plugins/jquery-ui.min.js')}}"></script>
     <!-- Jquery Countdown js -->
-    <script src="assets/js/plugins/jquery.countdown.min.js"></script>
+    <script src="{{ asset('assets/js/plugins/jquery.countdown.min.js')}}"></script>
     <!-- jquery magnific popup js -->
-    <script src="assets/js/plugins/jquery.magnific-popup.min.js"></script>
+    <script src="{{ asset('assets/js/plugins/jquery.magnific-popup.min.js')}}"></script>
 
     <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{ asset('assets/js/main.js')}}"></script>
 
 
 </body>

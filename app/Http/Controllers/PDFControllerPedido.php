@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Crabbly\Fpdf\Fpdf;
 use App\Pedido;
+use Illuminate\Support\Facades\DB;
 
 class PDFControllerPedido extends Controller
 {
@@ -12,7 +13,11 @@ class PDFControllerPedido extends Controller
     {
 
         ///////////////////
-        $pedido = Pedido::all();
+        $pedido = DB::table('pedido')
+                    ->join('cliente', 'pedido.idClienteFK', '=', 'cliente.idUsuarioFK')
+                    ->select('pedido.*', 'cliente.*', 'pedido.idPedido')
+                    ->whereNotNull('idEmpleadoFK')
+                    ->get();
         ///////////////////
 
         $tamañoceldas = 33;
@@ -53,15 +58,10 @@ class PDFControllerPedido extends Controller
             $pdf->Cell($tamañoceldas,10,$pedidos->fechaEnvio,'LRTB',0 ,'C');
             $pdf->Cell($tamañoceldas,10,$pedidos->fechaEntrega,'LRTB',0 ,'C');
             $pdf->SetFont('Times','B', 14 );
-            if($pedidos->estadoPedido===1){
                 $pdf->SetTextcolor(11, 158, 24);
-                $pdf->Cell($tamañoceldas,10,'Habilitado','LRTB',0 ,'C');}
-            else if ($pedidos->estadoPedido===2){
-                $pdf->SetTextcolor(174, 14, 14);
-                $pdf->Cell($tamañoceldas,10,'Inhabilitado','LRTB',0 ,'C');
-            }
+                $pdf->Cell($tamañoceldas,10, $pedidos->estadoPedido,'LRTB',0 ,'C');
             $pdf->SetTextcolor(0, 0, 0);
-            $pdf->Cell($tamañoceldas,10,$pedidos->cliente()->first()->nombreCliente,'LRTB',1 ,'C');
+            $pdf->Cell($tamañoceldas,10,$pedidos->nombreCliente,'LRTB',1 ,'C');
         }
 
 
