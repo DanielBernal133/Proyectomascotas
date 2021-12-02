@@ -430,7 +430,7 @@
                                     <a href="#download" data-toggle="tab"><i class="fa fa-cloud-download"></i>Soporte</a>
                                     <a href="#payment-method" data-toggle="tab"><i class="fa fa-credit-card"></i>Metodos de Pago</a>
                                     <a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i>Dirección</a>
-                                    <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i>Configurar mi cuenta</a>
+                                    <a  href="{{url('ventasclientes')}}" ><i class="fa fa-user"></i>Configurar mi cuenta</a>
                                     <a class="btn flosun-button secondary-btn rounded-0" href="{{url('logout')}}"><i class="fa fa-sign-out"></i>Cerrar Sesión</a>
                                 </div>
                             </div>

@@ -63,12 +63,12 @@
                         <nav class="main-nav d-none d-lg-flex">
                             <ul class="nav">
                                 <li>
-                                    <a href="contact-us.html">
+                                    <a href="{{ url ( 'add-to-cart/' )}}">
                                         <span class="menu-text">Inicio</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="contact-us.html">
+                                    <a href="{{ url ( 'carrito.shop' )}}" >
                                         <span class="menu-text">Tienda</span>
                                     </a>
                                 </li>
@@ -935,7 +935,7 @@
                 <!--Section Title Start-->
                 <div class="col-12 col-custom">
                     <div class="section-title text-center mb-30">
-                        <h3 class="section-title-3">Deal of The Day</h3>
+                        <h3 class="section-title-3">Promociones Navidad 50%</h3>
                     </div>
                 </div>
                 <!--Section Title End-->

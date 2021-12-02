@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Cliente;
 
 
 class LoginController extends Controller
@@ -43,6 +44,12 @@ class LoginController extends Controller
 
 
     public function perfil(){
-        return view('pagina.my-account');
+     
+        $cliente = Cliente::where('idUsuarioFK' , '=' , Auth::user()->idUsuario)->get();
+        return view('clientesdelavista.tables2')->with('clientes', $cliente);
+
+     
     }
 }
+
+

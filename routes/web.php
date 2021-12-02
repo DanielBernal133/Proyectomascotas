@@ -130,3 +130,15 @@ Route::get('reset-password/{token}' ,
 Route::post('reset-password' ,
 'Auth\ResetPasswordController@resetpassword'
 )->name('reset.password');
+
+
+
+//CLIENTES DE LA VISTA
+
+Route::resource('clientesvista', 'ClientesVistaController');
+
+Route:: post('clientesvista/{idUsuario}/cambiarcontraseña' , 'ClientesVistaController@actulizarcontraseña');
+
+
+Route::resource('clientesregistro', 'RegistrarDatosController');
+
