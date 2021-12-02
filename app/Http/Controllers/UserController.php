@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Registro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Usuario;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
+
 {
     /**
      * Display a listing of the resource.
@@ -46,7 +50,9 @@ class UserController extends Controller
         $usuario->estadoUsuario=1;
         $usuario->save();
 
-        return redirect()->route('login.form')->with('mensaje' , "Usuario Registrado");
+        Mail::to($usuario->email)->send(new Registro());
+
+        return redirect()->route('login.form')->with('mensaje' , "Usuario Registrado, por favor revisé spam o bandeja de entrada");
 
 
     }

@@ -47,10 +47,6 @@ Route::get('empleados/{empleado}/habilitar' , "EmpleadoController@habilitar")->m
 
 //Rutas get
 
-
-
-//Rutas get
-
 Route::get('Productos/{Producto}/habilitar' , "ProductoController@habilitar");
 
 Route::get('Pedidos/{pedido}/estadopedido', "PedidoController@estadopedido");
@@ -130,3 +126,7 @@ Route::get('reset-password/{token}' ,
 Route::post('reset-password' ,
 'Auth\ResetPasswordController@resetpassword'
 )->name('reset.password');
+
+
+//Gmail
+

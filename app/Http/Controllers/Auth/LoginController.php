@@ -17,19 +17,26 @@ class LoginController extends Controller
 
     public function login(Request $request){
 
-       //attempt Consulta EN BD si esxiste el usurio con emial y password ingresados
-        if( Auth::attempt(['email' => $request->input('name'),
+       //attempt Consulta EN BD si existe el usurio con email y password ingresados
+
+      if( Auth::attempt(['email' => $request->input('name'),
         'password' => $request->input('password')]) && Auth::check() && Auth::user()->idRolFK== '1') {
     //usuario autenticado
         return redirect()->route('Pedidos.index');
 
         }else if(Auth::check() && Auth::user()->idRolFK== '4'){
             return redirect('/');
+
+        }else if ( Auth::check() && Auth::user()->idRolFK== '3'){
+            return redirect()->route('Pedidos.index');
+        }else if ( Auth::check() && Auth::user()->idRolFK== '2'){
+            return redirect()->route('Pedidos.index');
         }
         else{
             //usuario no autenticado
             return redirect()->route('login.form')->with('mensajeerror', "Usuario no reconocido");
             }
+
 
     }
 
