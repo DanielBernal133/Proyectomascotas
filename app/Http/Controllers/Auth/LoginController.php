@@ -68,7 +68,6 @@ class LoginController extends Controller
             return redirect()->route('login.form')->with('mensajeerror', "Usuario no reconocido");
             }
     }
-    }
     //accion para cerrar sesion
     public function logout(){
      //metodo logout cierra estado de sesion de usuario
@@ -87,18 +86,8 @@ class LoginController extends Controller
                                      ->select('pedidodeproducto.*', 'pedido.*', 'producto.*')
                                      ->where('idClienteFK', Auth::user()->idUsuario)
                                      ->get();
-<<<<<<< HEAD
         $cliente = Cliente::where('idUsuarioFK' , '=' , Auth::user()->idUsuario)->get();
         return view('clientesdelavista.tables2')->with('detallees' , $producto)->with('clientes', $cliente)->with('detaller' , $nombreproduc);
-=======
-
-
-        $cliente = Cliente::where('idUsuarioFK' , '=' , Auth::user()->idUsuario)->get();
-        return view('clientesdelavista.tables2')->with('clientes', $cliente)->with('detalles' , $producto)->with('detaller' , $nombreproduc);
-
-
-
->>>>>>> CamilatodoFIN
     }
 }
 

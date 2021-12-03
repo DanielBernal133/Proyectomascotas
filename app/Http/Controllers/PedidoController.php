@@ -109,10 +109,10 @@ class PedidoController extends Controller
      * @param  \App\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, /*Pedido*/ $pedido)
+    public function update(Request $request, /*Pedido*/ $pedidos)
     {
 
-         $pedido = Pedido::find($pedido);
+         $pedido = Pedido::find($pedidos);
          $pedido->fechaEnvio = $request->input("fechaEnvio");
          $pedido->fechaEntrega = $request->input("fechaEntrega");
             //$pedido->estadoPedido = $request->input("estadoPedido");
@@ -126,7 +126,7 @@ class PedidoController extends Controller
                         ->join('cliente', 'pedido.idClienteFK', '=', 'cliente.idUsuarioFK')
                         ->join('usuario', 'cliente.idUsuarioFK', '=', 'usuario.idUsuario')
                         ->select('usuario.email')
-                        ->where('pedido.idPedido', $pedido)
+                        ->where('pedido.idPedido', $pedido->idPedido)
                         ->get();
         if($pedido->fechaEnvio >  $pedido->fechaEntrega){
              return redirect('Pedidos')->with('mensajeerror' , "La fecha de envio pasa la fecha de entrega ¡Revisar!");
