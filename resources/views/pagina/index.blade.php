@@ -99,10 +99,11 @@
 
                                         <div class="cart-links d-flex justify-content-between col-md-6 " style="margin:auto;flex-flow: row wrap">
                                             @if(Auth::user() == null)
-                                            <a class="btn flosun-button secondary-btn rounded-0" href="{{route('login.form')}}">Iniciar Sesión</a>
+                                            <a class="btn flosun-button secondary-btn rounded-0" href="{{route('login.form')}}">Iniciar Sesion</a>
                                             <a class="btn flosun-button secondary-btn rounded-0"  href="{{ route('registrar.form') }}">Registrarse</a>
                                             @else
                                             <a class="btn flosun-button secondary-btn rounded-0" href="{{url('perfil')}}">Ver perfil</a>
+                                            <a class="btn flosun-button secondary-btn rounded-0" href="{{route('logout.auth')}}">Cerrar oll</a>
                                             @endif
                                         </div>
                                     </div>

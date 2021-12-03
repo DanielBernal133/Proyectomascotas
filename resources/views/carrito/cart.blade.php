@@ -96,7 +96,7 @@
                                             <?php $total += $detalles['precio'] * $detalles['cantidad'] ?>
                                         <div class="single-cart-item">
                                             <div class="cart-img">
-                                                <a href="cart.html"><img src="assets/images/cart/1.jpg" alt=""></a>
+                                                <a href="cart.html"> <img src="{{asset('storage').'/'.$detalles['imagenProducto']}}"></a>
                                             </div>
                                             <div class="cart-text">
                                                 <h5 class="title"><a href="cart.html">{{ $detalles['nombre'] }}</a></h5>
@@ -430,6 +430,7 @@
                     <div class="cart-calculator-wrapper">
                         <div class="cart-calculate-items">
                             <h3>Total Carrito</h3>
+
                             <div class="table-responsive">
                                 <table class="table">
                                     <tr class="total">
@@ -437,6 +438,7 @@
                                         <td class="total-amount">${{ $total }}</td>
                                     </tr>
                                 </table>
+
                             </div>
                         </div>
                         <form method="POST" action="{{ url('Pedidos') }}">
@@ -444,11 +446,21 @@
                                 <?php
                                 $cart = session()->get('cart');
                                 ?>
+
+
+      <center><input type="radio" name="checkboxes" id="checkboxes-0" >
+      <strong class="text-danger">{{ $errors->first('checkboxes')}}</strong>
+      Acepto <a class=""  href="{{url ('L')}}">términos y condiciones </a></center>
+
+
+
                                 @if ($cart == null)
                                     <center><p><strong>No tienes productos en el carrito </strong></p></center>
                                 @else
+
                                     <button type="submit" class="btn flosun-button primary-btn rounded-0 black-btn w-100">Hacer pedido</button>
                                 @endif
+
                         </form>
                     </div>
                 </div>

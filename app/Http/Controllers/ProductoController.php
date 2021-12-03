@@ -162,14 +162,14 @@ class ProductoController extends Controller
             case 1:
                 $Producto->estadoProducto=2;
                 $Producto->save();
-                $mensaje_exito = 'Empleado Deshabilitado';
+                $mensaje_exito = 'Estado Deshabilitado';
 
                 break;
 
             case 2:
                 $Producto->estadoProducto=1;
                 $Producto->save();
-                $mensaje_exito = 'Empleado Activado';
+                $mensaje_exito = 'Estado Activado';
                 break;
 
 

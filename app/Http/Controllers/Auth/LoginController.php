@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Pedido;
 use Illuminate\Support\Facades\DB;
 use App\Empleado;
+use App\Cliente;
+
 
 class LoginController extends Controller
 {
@@ -37,7 +39,10 @@ class LoginController extends Controller
                 }
             }
             //usuario autenticado
-        }else if(Auth::check() && Auth::user()->idRolFK== '4'){
+     }else if(Auth::check() && Auth::user()->idRolFK== '4'){
+         $consulta = DB::table('cliente')->where('idUsuarioFK', Auth::user()->idUsuario)->doesntExist();
+            if($consulta){
+                return redirect('perfil')->with('mensaje_war', "Debes completar tus datos faltantes para poder hacer una compra. da click en Registro Datos");
 
             return redirect('/');
         }else if ( Auth::check() && Auth::user()->idRolFK== '3'){
@@ -63,7 +68,7 @@ class LoginController extends Controller
             return redirect()->route('login.form')->with('mensajeerror', "Usuario no reconocido");
             }
     }
-
+    }
     //accion para cerrar sesion
     public function logout(){
      //metodo logout cierra estado de sesion de usuario
@@ -82,6 +87,14 @@ class LoginController extends Controller
                                      ->select('pedidodeproducto.*', 'pedido.*', 'producto.*')
                                      ->where('idClienteFK', Auth::user()->idUsuario)
                                      ->get();
-        return view('pagina.my-account')->with('detalles' , $producto)->with('detaller' , $nombreproduc);
+
+
+        $cliente = Cliente::where('idUsuarioFK' , '=' , Auth::user()->idUsuario)->get();
+        return view('clientesdelavista.tables2')->with('clientes', $cliente)->with('detalles' , $producto)->with('detaller' , $nombreproduc);
+
+
+
     }
 }
+
+

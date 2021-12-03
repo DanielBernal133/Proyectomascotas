@@ -23,6 +23,7 @@ class CarritoController extends Controller
     }
 
     public function addTocart($idProducto){
+
         $producto = Producto::find($idProducto);
         $cart = session()->get('cart');
         if($cart==null) {
@@ -31,7 +32,8 @@ class CarritoController extends Controller
                         "cantidad" => 1,
                         "nombre"=>$producto->nombreProducto,
                         "precio" => $producto->precioProducto,
-                        "IdProducto" => $producto->idProducto
+                        "IdProducto" => $producto->idProducto,
+                    "imagenProducto"=> $producto->imagenProducto
                     ]
             ];
             session()->put('cart', $cart);
@@ -46,7 +48,8 @@ class CarritoController extends Controller
                 "cantidad" => 1,
                 "nombre"=>$producto->nombreProducto,
                 "precio" => $producto->precioProducto,
-                "IdProducto" => $producto->idProducto
+                "IdProducto" => $producto->idProducto,
+                "imagenProducto"=> $producto->imagenProducto
             ];
             session()->put('cart', $cart);
             return redirect('carrito')->with('mensaje_exito', "Producto añadido al carrito");
