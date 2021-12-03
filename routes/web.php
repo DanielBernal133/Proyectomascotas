@@ -36,7 +36,7 @@ Route::resource('pedidosproductos', 'pedidoDeProductoController');
 
 Route::resource('Marcas', 'MarcaController')->middleware('sesiones');
 
-
+Route::get('cancelacion' , "novedadesController@novedades");
 //Rutas get
 
 Route::get('Productos/{Producto}/habilitar' , "ProductoController@habilitar")->middleware('sesiones');
@@ -88,7 +88,7 @@ Route::get('O', function (){
 
 
 Route::resource('datoscliente', 'DatosClienteController');
-
+Route::post('telefono' , "TelefonoController@guardarDatos");
 
 Route::resource('usuarios', 'UserController');
 Route::get('registrar' , 'UserController@create')->name('registrar.form');

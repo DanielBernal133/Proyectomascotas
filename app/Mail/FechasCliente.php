@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class FechasMail extends Mailable
+class FechasCliente extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,6 +28,7 @@ class FechasMail extends Mailable
      */
     public function build()
     {
-
+        return $this->subject('Fechas validadas')
+        ->view('correo.fechasCorreo');
     }
 }

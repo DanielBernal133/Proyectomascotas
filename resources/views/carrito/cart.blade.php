@@ -444,6 +444,7 @@
                                 <?php
                                 $cart = session()->get('cart');
                                 ?>
+                                
                                 @if ($cart == null)
                                     <center><p><strong>No tienes productos en el carrito </strong></p></center>
                                 @else

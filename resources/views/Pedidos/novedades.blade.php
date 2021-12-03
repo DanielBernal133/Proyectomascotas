@@ -20,7 +20,6 @@
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.css" rel="stylesheet">
-    <link href="css/modal.css" rel="stylesheet">
     <link href="css/stilos4.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
@@ -32,6 +31,8 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
+
+        <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
@@ -49,19 +50,14 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{url('Pedidos')}}">
-                    <i class="fab fa-product-hunt"></i>
-                    <span>Pedidos</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{url('cancelacion')}}">
-                    <i class="far fa-window-close"></i>
-                    <span>Cancelacion de Pedidos</span></a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="{{url('Productos')}}">
                     <i class="fab fa-product-hunt"></i>
                     <span>Productos</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('empleados')}}">
+                    <i class="far fa-address-card"></i>
+                    <span>Empleados</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{url('clientes')}}">
@@ -313,102 +309,108 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h4 class="m-0 font-weight-bold text-primary">Datos empleados</h4>
+                            <h4 class="m-0 font-weight-bold text-primary">Tabla Pedidos</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Nombre empleado</th>
-                                            <th>Telefono Empleado</th>
-                                            <th>Estado Empleado</th>
-                                            <th>Usuario</th>
-                                            <th>Datos del Empleado</th>
-                                            <th>Actualizar Empleado</th>
-                                            <th>Habilitar Empleado</th>
+                                          <th >ID</th>
+                                          <th >Fecha Solicitud</th>
+                                          <th >Fecha Envío</th>
+                                          <th >Fecha Entrega</th>
+                                          <th>Cliente</th>
+                                          {{-- <th>Empleado</th> --}}
+                                          <th >Estado Pedido</th>
+                                          <th >Acciones</th>
+
                                         </tr>
-                                    </thead>
+                                      </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Nombre empleado</th>
-                                            <th>Telefono Empleado</th>
-                                            <th>Estado Empleado</th>
-                                            <th>Usuario</th>
-                                            <th>Datos del Empleado</th>
-                                            <th>Actualizar Empleado</th>
-                                            <th>Habilitar Empleado</th>
-                                        </tr>
+                                            <th >ID</th>
+                                            <th >Fecha Solicitud</th>
+                                            <th >Fecha Envío</th>
+                                            <th >Fecha Entrega</th>
+                                            <th>Cliente</th>
+                                            {{-- <th>Empleado</th> --}}
+                                            <th >Estado Pedido</th>
+                                            <th >Acciones</th>
+
+                                          </tr>
                                     </tfoot>
                                     <tbody>
-                                    @foreach ($empleados as $empleado)
-                                    <tr>
-                                        <td>
-                                            {{$empleado->nombreEmpleado}}
-                                        </td>
-                                        <td>
-                                            {{$empleado->telefonoEmpleado}}
-                                        </td>
-                                        <td>
-                                            @if ($empleado -> estadoEmpleado == 1)
-                                                Activo
-                                            @elseif ($empleado -> estadoEmpleado == 2)
-                                                En espera
-                                            @else
-                                                Inactivo
-                                             @endif
-                                        </td>
-                                        <td>
-                                            {{$empleado->usuario()->first()->name}}
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-primary" href="{{ url(('empleados/'. $empleado->idEmpleado)) }}">
-                                                Detalles
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-primary" href="{{ url(('empleados/'. $empleado->idEmpleado . "/edit")) }}">
-                                                Actualizar
-                                            </a>
-                                        </td>
-                                        <td>
-                                            @switch($empleado->estadoEmpleado)
-                                            @case(null)
-                                            <a class="btn btn-primary" href="{{ url('empleados/'. $empleado->idEmpleado . "/habilitar") }}">
-                                                Asignar estado
-                                            </a>
-                                            @break
-                                            @case(1)
-                                            <strong class="text-success">Empleado hablilitado</strong>
-                                            <a class="btn btn-primary" href="{{ url('empleados/'. $empleado->idEmpleado . "/habilitar") }}">
-                                                Deshabilitar
-                                            </a>
-                                            @break
-                                            @case(2)
-                                            <strong class="text-danger">Empleado deshabilitado</strong>
-                                            <a class="btn btn-primary" href="{{ url('empleados/'. $empleado->idEmpleado . "/habilitar") }}">
-                                                Habilitar
-                                            </a>
-                                            @break
-                                        @endswitch
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                    </tbody>
-                                </table>
-                                <a class="btn btn-primary" href="{{ url('empleados/create') }}">
-                                    Nuevo Empleado
-                                </a>
-                                <a href="{{url ('pdfemple')}}" class="btn btn-info">Generar Reporte</a>
-                            </div>
-                        </div>
-                    </div>
+                                        @foreach ($novedades as $nombre)
+                                        <tr>
+                                            <td>{{$nombre->idPedido}}</td>
+                                            <td>{{$nombre->fechaSolicitud}}</td>
+                                            <td>
+                                                @if ($nombre->fechaEnvio == null)
+                                                    <p style="color: red">Fechas aún por validar</p>
+                                                @else
+                                                    {{$nombre->fechaEnvio}}
+                                                @endif
+                                            </td>
+                                                <td>
+                                                    @if ($nombre->fechaEnvio == null)
+                                                        <p style="color: red">Fechas aún por validar</p>
+                                                    @else
+                                                        {{$nombre->fechaEntrega}}
+                                                    @endif
+                                                </td>
+                                            <td>
+                                                {{$nombre->nombreCliente}}
+                                            </td>
+                                            {{-- <td>
+                                                @if ($nombre->nombreEmpleado == null)
+                                                <p style="color: red">Usuario por editar</p>
+                                                @else
+                                                    {{$nombre->nombreEmpleado}}
+                                                @endif
+                                            </td> --}}
+                                            <td>
+                                                {{$nombre->estadoPedido}}
+                                            </td>
+                                            <td>
+                                                @if ($nombre->estadoPedido == 'Cancelado')
+                                                    <a href="{{url ('Pedidos/' . $nombre->idPedido . "/edit") }}" class="btn btn-info">Administar</a>
+                                                @else
+                                                    <p style="color: green"><strong>Novedad validadas</strong></p>
+                                                @endif
+                                            </td>
+                                             {{-- <td>
+                                                @switch($pedido->estadoPedido)
+                                                    @case( null )
+                                                    <a href="{{ url ('Pedidos/' . $pedido->idPedido . "/estadopedido" ) }}">
+                                                        Asignar estado
+                                                    </a>
+                                                    @break
+                                                    @case( 1 )
+                                                         <strong class="text success"> Pedido Habilitado </strong>
+                                                         <a href="{{ url ('Pedidos/' . $pedido->idPedido . "/estadopedido" ) }}">
+                                                        Deshabilitar
+                                                    </a>
+                                                    @break
+                                                    @case( 2 )
+                                                        <strong class="text success"> Pedido Deshabilitado </strong>
+                                                        <a href="{{ url ('Pedidos/' . $pedido->idPedido . "/estadopedido" ) }}">
+                                                        Habilitar
+                                                    </a>
+                                                    @break
 
-                </div>
+                                                @endswitch
+                                            </td> --}}
+                                        </tr>
+
+                                        @endforeach
+                                      </tbody>
+                                </table>
+                                <a href="Pedidos/create" class="btn btn-primary">CREAR PEDIDO</a>
+                                <a href="{{url ('pdfpedi')}}" class="btn btn-info">Generar Reporte</a>
                 <!-- /.container-fluid -->
 
             </div>
@@ -417,7 +419,9 @@
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
-
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Woofmate</span>
+                    </div>
                 </div>
             </footer>
             <!-- End of Footer -->
@@ -470,16 +474,28 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
     <script src="js/main2.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> --}}
     @if ( session("mensaje_exito"))
         <script>
-            swal("Trabajo echo" , "{{ session('mensaje_exito') }}" , "success", {
-                button: "OK",
-            });
+            swal("Trabajo echo!", "{{ session('mensaje_exito') }}", "success");
         </script>
     {{-- <div>{{ session("mensaje_exito") }} </div> --}}
     @endif
 
+    @if ( session("mensaje"))
+    <script>
+        swal("¡Atención!", "{{ session('mensaje') }}", "warning");
+    </script>
+{{-- <div>{{ session("mensaje_exito") }} </div> --}}
+@endif
+
+@if ( session("mensajeerror"))
+<script>
+    swal("¡Atención!", "{{ session('mensajeerror') }}", "warning");
+</script>
+{{-- <div>{{ session("mensaje_exito") }} </div> --}}
+@endif
 </body>
 
 </html>

@@ -6,76 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ClientesVista;
 use App\Usuario;
 use Illuminate\Support\Facades\Hash;
+use App\Cliente;
+use App\Http\Requests\StoreCliente;
+use Illuminate\Support\Facades\Auth;
+use App\Pedido;
+use Illuminate\Support\Facades\DB;
+
 class ClientesVistaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-
-        return view('clientesdelavista.tables2')->with('clientes',Usuario::paginate(10));
-        
-    }
-//
-
-
-
-//
-    public function create()
-    {
-        $usuarios=Usuario::all();
-        return view ('clientes.create')->with("usuarios", $usuarios);
-    }
-//
-
-
-
-//
-    public function store(StoreCliente $request)
-    {
-        //Validacion: procesar datos de un input
-        //1. establecer las reglas de validacion:
-        /*$reglas_validacion=[
-            "nombre"=>'required|alpha|max:10',
-            "apellido"=>'required|alpha|max:20',
-            "direccion"=>'required|max:40',
-            "estado",
-            "usuario"
-        ];
-
-        //2. Crear el objeto de validacion:
-        $validador= Validator::make($request->all(), $reglas_validacion);
-
-        //3. Validar
-        if($validador->fails()){
-            //validacion fallida
-            return redirect('clientes/create')->withErrors($validador);
-        }*/
-
-
-        //crear el nuevo recurso cliente
-        $nuevocliente = new Cliente();
-        $nuevocliente->nombreCliente = $request->input("nombre");
-        $nuevocliente->apellidoCliente = $request->input("apellido");
-        $nuevocliente->direccionCliente = $request->input("direccion");
-        $nuevocliente->telefonoCliente = $request->input("telefono");
-        $nuevocliente->estadoCliente = $request->input("estado");
-        $nuevocliente->idUsuarioFK = $request->input("usuario");
-        $nuevocliente->save();
-
-        //redireccionar a la ruta deseada
-        //radireccionar solo sirve en rutas GET
-        //redirect puede enviar a la ruta destino lo que se denomina como datos flash
-        return redirect("clientes")->with('mensaje_exito', "Cliente exitoso");
-    }
-//
-
-
-
-//
+ 
     public function show(Cliente $cliente)
     {
         $usuarios=Usuario::find($cliente);
@@ -89,7 +28,8 @@ class ClientesVistaController extends Controller
     public function edit(Usuario $clientesvista)
     {
         //mostrar el formulario de actualizar recurso
-        //return view ('clientesdelavista.tables2')->with('clientesvista', $clientesvista);
+        $cliente = Cliente::where('idUsuarioFK' , '=' , Auth::user()->idUsuario)->get();
+        return view ('clientesdelavista.tables2')->with('clientes', $cliente);
     }
 //
 
@@ -99,7 +39,7 @@ class ClientesVistaController extends Controller
     {
         $cliente = Usuario::find($cliente);
         //actualizar el cliente que llega atravez del comdel binding
-       
+
         $cliente->email = $request->input("email");
         $cliente->apellido = $request->input("apellido");
         $cliente->name = $request->input("name");
@@ -152,18 +92,18 @@ public function actulizarcontraseña( ClientesVista $request, $usu ){
 
 
     $usu = Usuario::find($usu);
- 
+
     //actualizar el cliente que llega atravez del comdel binding
-    
+
     $usu->password= Hash::make( $request->password);
     $usu->save();
-    
+
     $logout = new LoginController();
     return  $logout->logout();
-    
 
 
-    
+
+
     }
 
 }

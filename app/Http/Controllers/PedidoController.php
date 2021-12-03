@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\FechasMail;
+use App\FechasModel;
+use App\Mail\FechasCliente;
 use App\Pedido;
 use App\pedidoDeProducto;
 use Illuminate\Http\Request;
@@ -111,26 +112,36 @@ class PedidoController extends Controller
     public function update(Request $request, /*Pedido*/ $pedido)
     {
 
-        $pedido = Pedido::find($pedido);
-        $pedido->fechaEnvio = $request->input("fechaEnvio");
-        $pedido->fechaEntrega = $request->input("fechaEntrega");
-        $pedido->estadoPedido = $request->input("estadoPedido");
-        $pedido->idEmpleadoFK= Auth::user()->idUsuario;
+         $pedido = Pedido::find($pedido);
+         $pedido->fechaEnvio = $request->input("fechaEnvio");
+         $pedido->fechaEntrega = $request->input("fechaEntrega");
+            //$pedido->estadoPedido = $request->input("estadoPedido");
+         $pedido->idEmpleadoFK= Auth::user()->idUsuario;
+         $consulta = DB::table('fechaarreglo')
+                        ->select('fechaarreglo.*')
+                        ->whereDate('fecha_de_arreglo' , Carbon::now())
+                        ->where('idEmpleadoFK', Auth::user()->idUsuario)
+                        ->count();
         $correo = DB::table('pedido')
-                            ->join('cliente', 'pedido.idClienteFK', '=', 'cliente.idUsuarioFK')
-                            ->join('usuario', 'cliente.idUsuarioFK', '=', 'usuario.idUsuario')
-                            ->select('usuario.email')
-                            ->where('pedido.idPedido', $pedido)
-                            ->get();
+                        ->join('cliente', 'pedido.idClienteFK', '=', 'cliente.idUsuarioFK')
+                        ->join('usuario', 'cliente.idUsuarioFK', '=', 'usuario.idUsuario')
+                        ->select('usuario.email')
+                        ->where('pedido.idPedido', $pedido)
+                        ->get();
         if($pedido->fechaEnvio >  $pedido->fechaEntrega){
-            return redirect('Pedidos')->with('mensajeerror' , "La fecha de envio pasa la fecha de entrega ¡Revisar!");
-        }
-        else{
+             return redirect('Pedidos')->with('mensajeerror' , "La fecha de envio pasa la fecha de entrega ¡Revisar!");
+         }
+         else if($consulta > '30'){
+            return redirect('Pedidos')->with('mensaje_exito' , "Ya no puedes validar mas fechas por hoy :D");
+         }
+         else {
             $pedido->save();
-            Mail::to($correo)->send(new FechasMail());
+            Mail::to($correo)->send(new FechasCliente());
+            DB::table('fechaarreglo')->insert([
+                ['fecha_de_arreglo' => Carbon::now(), 'idEmpleadoFK' => Auth::user()->idUsuario]
+            ]);
             return redirect('Pedidos')->with('mensaje_exito' , "Fechas validadas correctamente");
-        }
-
+         }
     }
 
     /**
@@ -144,24 +155,10 @@ class PedidoController extends Controller
     public function estadopedido($idPedido){
 
         $pedido = Pedido::find($idPedido);
-        switch($pedido->estadoPedido){
-            case null:
-                $pedido->estadoPedido= 1;
+                $pedido->estadoPedido = 'Cancelado';
                 $pedido->save();
-                $mensaje_exito = "Pedido Activado";
-                break;
-            case 1:
-                $pedido->estadoPedido = 2;
-                $pedido->save();
-                $mensaje_exito = "Pedido Desactivado";
-                break;
-            case 2:
-                $pedido->estadoPedido= 1;
-                $pedido->save();
-                $mensaje_exito = "Pedido Activado";
-                break;
-        }
-        return redirect('Pedidos')->with('mensaje_exito' , $mensaje_exito);
+                $mensaje_exito = "Su cancelación fue registrada";
+                return redirect('perfil')->with('mensaje_exito' , $mensaje_exito);
     }
 
 

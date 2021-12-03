@@ -8,8 +8,8 @@ class Producto extends Model
 {
     //vvincular modelo atributo
     protected $table="producto";
-//establecer la PK para la entidad (por defecto: id)
-protected $primaryKey ="idProducto";
+    //establecer la PK para la entidad (por defecto: id)
+    protected $primaryKey ="idProducto";
 
     //omitir campos de auditoria
     public $timestamps = false;

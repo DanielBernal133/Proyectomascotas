@@ -101,13 +101,11 @@
                                         </i>
                                     </a>
                                     <div class="cart-item-wrapper dropdown-sidemenu dropdown-hover-2">
-
                                         <div class="cart-links d-flex justify-content-between col-md-6 " style="margin:auto;flex-flow: row wrap">
-                                            <a class="btn flosun-button secondary-btn rounded-0" href="{{url('logout')}}">Cerrar Sesión</a>
+                                            <a class="btn flosun-button secondary-btn rounded-0" href="{{url('logout')}}">Cerrar</a>
                                         </div>
                                     </div>
                                 </li>
-
                                 <li class="sidemenu-wrap">
                                     <a href="#"><i class="fa fa-search"></i> </a>
                                     <ul class="dropdown-sidemenu dropdown-hover-2 dropdown-search">
@@ -429,7 +427,7 @@
                                 <div class="myaccount-tab-menu nav" role="tablist">
                                     <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>Historial de Pedidos</a>
                                     <a href="#payment-method"data-toggle="tab"><i class="fa fa-map-marker"></i>Registro Datos</a>
-                                    <a href="#download" data-toggle="tab"><i class="fa fa-cloud-download"></i>Soporte</a>                               
+                                    <a href="#download" data-toggle="tab"><i class="fa fa-cloud-download"></i>Soporte</a>
                                     <a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i>Dirección</a>
                                     <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i>Configurar mi cuenta</a>
                                     <a class="btn flosun-button secondary-btn rounded-0" href="{{url('logout')}}"><i class="fa fa-sign-out"></i>Cerrar Sesión</a>
@@ -441,7 +439,7 @@
                             <div class="col-lg-9 col-md-8 col-custom">
                                 <div class="tab-content" id="myaccountContent">
                                     <!-- Single Tab Content Start -->
-                                 
+
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
@@ -449,132 +447,127 @@
                                         <div class="myaccount-content">
                                             <h3>Historial de pedidos</h3>
                                             <div class="myaccount-table table-responsive text-center">
+
                                                 <table class="table table-bordered">
                                                     <thead class="thead-light">
                                                         <tr>
-                                                            <th>Orden</th>
-                                                            <th>Día</th>
-                                                            <th>Estado</th>
-                                                            <th>Total</th>
-                                                            <th>Acción</th>
+                                                            <th>Fecha Solicitud</th>
+                                                            <th>Fecha Envio</th>
+                                                            <th>Fecha Entrega</th>
+                                                            <th>Estado Entrega</th>
+                                                            <th>Nombre Producto</th>
+                                                            <th>Acciones</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>10/09/2021</td>
-                                                            <td>Pendiente</td>
-                                                            <td>$3000</td>
-                                                            <td><a href="cart.html" class="btn flosun-button secondary-btn theme-color  rounded-0">Ver</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>15/09/2021</td>
-                                                            <td>Aprovado</td>
-                                                            <td>$20000</td>
-                                                            <td><a href="cart.html" class="btn flosun-button secondary-btn theme-color  rounded-0">Ver</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>18/07/2021</td>
-                                                            <td>En espera</td>
-                                                            <td>$55000</td>
-                                                            <td><a href="cart.html" class="btn flosun-button secondary-btn theme-color  rounded-0">Ver</a></td>
-                                                        </tr>
+                                                    @foreach ($detallees as $detalle)
+                                                    @foreach ($detaller as $detall)
+                                                    <tr>
+                                                        <td>
+                                                            @if ($detalle->fechaSolicitud == null)
+                                                                <p style="color:red;">Fecha aun por validar</p>
+                                                            @else
+                                                                {{$detalle->fechaSolicitud }}
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($detalle->fechaEnvio == null)
+                                                            <p style="color:red;">Fecha aun por validar</p>
+                                                            @else
+                                                                {{$detalle->fechaEnvio }}
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($detalle->fechaEntrega == null)
+                                                            <p style="color:red;">Fecha aun por validar</p>
+                                                            @else
+                                                                {{$detalle->fechaEntrega }}
+                                                            @endif
+                                                        </td>
+                                                        <td>{{$detalle->estadoPedido}}</td>
+                                                        <td>{{$detall->nombreProducto}}</td>
+                                                        <td>
+                                                            @if ($detall->estadoPedido == 'Concluido')
+                                                            <a href="{{ url('Pedidos/'. $detall->idPedido . "/estadopedido") }}" class="btn flosun-button secondary-btn theme-color  rounded-0">Novedad</a>
+                                                            @else
+                                                            Hola
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                                    @endforeach
                                                     </tbody>
                                                 </table>
+
                                             </div>
                                         </div>
-                                    </div>
+                                        </div>
                                     <!-- Single Tab Content End -->
 
-                                 
+
                                     <!--REGISTRO DE DATOS-->
-                              
                                     <div class="tab-pane fade" id="payment-method" role="tabpanel">
-                                        <div class="payment-method">
-                                        <center> <h3> Editar Dirección</h3></center>
-                                    
-                                        @foreach($clientes as $cliente)
-                                       @if($cliente->direccionCliente && $cliente->telefonoCliente == null)
-                                        <center>
 
-                                    <form class="form-horizontal" action="{{ url('clientesregistro') }}" method="POST" > 
-                                      
-                                        @csrf
-                                            <div class="row">
-                                            
-                                                <div class="col-lg-12 col-custom">
-                                                  <label for="email" class="required mb-1"> </label>
-                                                    <input value="{{old('direccion')}}" name="direccion" type="text" placeholder="" class="form-control input-md">
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-lg-12 col-custom">
-                                                    <label for="email" class="required mb-1">Telefono</label>
-                                                    <input  value="{{old('telefono')}}" name="telefono" type="number" placeholder="" class="form-control input-md">
-                                                </div>
-                                            </div>
-
-
-                            
-                                                    <p>
-                                            <div class="single-input-item single-item-button">
-                                             <center>   <button type="submit" class="btn flosun-button secondary-btn theme-color  rounded-0">Guardar cambios</button></center>
-                                            </div>
-                                        
-                                        </p>
-                                        
-</form>
-                                        
-                                        
-                               
-                                       @else
-                                          
-                                  
-                                        
-                                     
-                                        <form class="form-horizontal" action="{{ url('clientesregistro/'.$cliente->idCliente) }}"   method="POST" > 
-                                        @method('PUT')
-                                        @csrf
-
-                                        
-                                                                                
+                                        <?php
+                                        $consulta =DB::table('cliente')->where('idUsuarioFK', Auth::user()->idUsuario)
+                                                                    ->doesntExist();?>
+                                @if($consulta)
+                                    <div class="payment-method">
+                                        <center> <h3>Completar Registro</h3></center>
+                                    </div>
+                                    <center>
+                                        <form class="form-horizontal" action="{{ url('telefono') }}" method="POST">
+                                            @csrf
                                             <div class="row">
                                                 <div class="col-lg-6 col-custom">
                                                     <div class="single-input-item mb-3">
-                                                        <label for="first-name" class="required mb-1">Direccion</label>
-                                                        <input value="{{$cliente->direccionCliente}}" name="direccion" type="text" placeholder="" class="form-control input-md">
-                                                      <strong>  {{ $errors->first("direccion") }} </strong>
+                                                        <label for="first-name" class="required mb-1">Telefono</label>
+                                                        <input  value="{{old('telefono')}}" name="telefono" type="number" placeholder="" class="form-control input-md">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-custom">
                                                     <div class="single-input-item mb-3">
-                                                        <label for="last-name" class="required mb-1">Telefono</label>
-                                                        <input value="{{$cliente->telefonoCliente}}" name="telefono" type="text" placeholder="" class="form-control input-md">
-                                                  <strong>      {{ $errors->first("telefono") }}</strong>
+                                                        <label for="last-name" class="required mb-1">Direccion</label>
+                                                        <input value="{{old('direccion')}}" name="direccion" type="text" placeholder="" class="form-control input-md">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="single-input-item single-item-button">
                                             <center>    <button type="submit" class="btn flosun-button secondary-btn theme-color  rounded-0">Guardar cambios</button></center>
                                             </div>
-                                        @endif
-                                         @endforeach  
-                    
-                                    </form>
-
-                                    </center>
-
-
-                                    </div>
-</div>
-
-
-
-
-
+                                            </form>
+                                        </center>
+                                       @else
+                                       <div class="payment-method">
+                                        <center> <h3> Editar Direccion y telefono</h3></center>
+                                        </div>
+                                       @foreach($clientes as $cliente)
+                                            <form class="form-horizontal" action="{{ url('clientesregistro/'.$cliente->idCliente) }}"   method="POST" >
+                                                @method('PUT')
+                                                @csrf
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-custom">
+                                                            <div class="single-input-item mb-3">
+                                                                <label for="first-name" class="required mb-1">Direccion</label>
+                                                                <input value="{{$cliente->direccionCliente}}" name="direccion" type="text" placeholder="" class="form-control input-md">
+                                                              <strong>  {{ $errors->first("direccion") }} </strong>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-custom">
+                                                            <div class="single-input-item mb-3">
+                                                                <label for="last-name" class="required mb-1">Telefono</label>
+                                                                <input value="{{$cliente->telefonoCliente}}" name="telefono" type="text" placeholder="" class="form-control input-md">
+                                                          <strong>      {{ $errors->first("telefono") }}</strong>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="single-input-item single-item-button">
+                                                    <center>    <button type="submit" class="btn flosun-button secondary-btn theme-color  rounded-0">Guardar cambios</button></center>
+                                                    </div>
+                                                </form>
+                                                @endforeach
+                                @endif
+                                </div>
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade" id="download" role="tabpanel">
                                         <div class="myaccount-content">
@@ -607,21 +600,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Single Tab Content End -->
 
-                                    <!-- Single Tab Content Start -->
-                        
-                                    <!-- Single Tab Content End -->
+                                     <!-- Single Tab Content Start -->
 
-                                    <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade" id="address-edit" role="tabpanel">
                                       <center>  <div class="myaccount-content">
                                             <h3>Dirección</h3>
                                             <address>
-                                         
+
                                           <ul>
-                                          <li>Dirección: {{$cliente -> direccionCliente}}</li>                                              
-                                       <li>Telefono: {{$cliente -> telefonoCliente}}</li>
+                                            @foreach($clientes as $cliente)
+                                          <li>Dirección: {{$cliente -> direccionCliente}}</li>
+                                        <li>Telefono: {{$cliente -> telefonoCliente}}</li>
                                         <li>Estado: @if ($cliente -> estadoCliente == 1)
                                             Activo
                                            @elseif ($cliente -> estadoCliente == 2)
@@ -629,10 +619,11 @@
                                                @else
                                             Inactivo
                                            @endif</li>
-                                     
+                                           @endforeach
+
                                     </ul>
                                             </address>
-                                       
+
                                         </div></center>
                                     </div>
                                     <!-- Single Tab Content End -->
@@ -642,21 +633,20 @@
                                     <!--ACTULIZAR DATOS BASICOS-->
                                     <div class="tab-pane fade" id="account-info" role="tabpanel">
                                         <div class="myaccount-content">
-                                       
+
                                         <center>
-    
+
                                         <?php
                                         use App\Usuario;
                                         $cliente=Usuario::find(Auth::user()->idUsuario);
                                         ?>
 
-                                    <form class="form-horizontal" action="{{ url('clientesvista/'.$cliente->idUsuario) }}"   method="POST" > 
+                                    <form class="form-horizontal" action="{{ url('clientesvista/'.$cliente->idUsuario) }}"   method="POST" >
                                         @method('PUT')
                                         @csrf
-
                                         <center><legend>Actulizar Usuario {{ $cliente->nombre }} {{ $cliente->apellido}}</legend></center>
-                                        
-                                                                                
+
+
                                             <div class="row">
                                                 <div class="col-lg-6 col-custom">
                                                     <div class="single-input-item mb-3">
@@ -683,7 +673,7 @@
                                             <div class="single-input-item single-item-button">
                                                 <button type="submit" class="btn flosun-button secondary-btn theme-color  rounded-0">Guardar cambios</button>
                                             </div>
-                                        
+
                                         </p>
 
                                     </form>
@@ -693,13 +683,13 @@
                                     <!--ACTULIZAR DATOS CONTRASEÑA-->
                                     <br>
                                      <br>
-                                        <br>    
-                                    <form class="form-horizontal" action="{{ url('clientesvista/'.Auth::user()->idUsuario.'/cambiarcontraseña') }}"   method="POST" > 
-                                        
+                                        <br>
+                                    <form class="form-horizontal" action="{{ url('clientesvista/'.Auth::user()->idUsuario.'/cambiarcontraseña') }}"   method="POST" >
+
                                         @csrf
 
                                     <center><legend>Actulizar Contraseña </legend></center>
-                                        
+
                                     <div class="row">
                                                     <div class="col-lg-6 col-custom">
                                                             <div class="single-input-item mb-3">
@@ -719,12 +709,7 @@
                                                     <div class="single-input-item single-item-button">
                                              <button   type="submit" class="btn flosun-button secondary-btn theme-color  rounded-0">Actualizar contraseña</button>
                                             </div>
-                                        
                                     </form>
-</br>
-</br>
-</br>
-
                                               </div>
                                     </div>
                                 </div> <!-- Single Tab Content End -->
@@ -792,8 +777,32 @@
 
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> --}}
+    @if ( session("mensaje_exito"))
+        <script>
+            swal("Exito!", "{{ session('mensaje_exito') }}", "success");
+        </script>
+    {{-- <div>{{ session("mensaje_exito") }} </div> --}}
+    @endif
 
+    @if (session('mensaje'))
+    <script>
+      swal("Exito!", "{{ session('mensaje') }}", "success");
+    </script>
+    @endif
 
+    @if (session('mensajeerror'))
+    <script>
+      swal("Oops..", "{{ session('mensajeerror') }}", "error");
+    </script>
+    @endif
+    @if ( session("mensaje_war"))
+        <script>
+            swal("¡Alerta!", "{{ session('mensaje_war') }}", "warning");
+        </script>
+    {{-- <div>{{ session("mensaje_exito") }} </div> --}}
+    @endif
 </body>
 
 </html>

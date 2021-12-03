@@ -401,32 +401,14 @@
                         <div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area">
                             <div class="product-item">
                                 <div class="single-product position-relative mr-0 ml-0">
-                                    <div class="product-image">
-                                        <a class="d-block" href="product-details.html">
-                                            <img src="assets/images/product/2.jpg" alt="" class="product-image-1 w-100">
-                                        </a>
-                                        <span class="onsale">Sale!</span>
-                                        <div class="add-action d-flex flex-column position-absolute">
-                                            <a href="compare.html" title="Compare">
-                                                <i class="lnr lnr-sync" data-toggle="tooltip" data-placement="left" title="Compare"></i>
-                                            </a>
-                                            <a href="wishlist.html" title="Add To Wishlist">
-                                                <i class="lnr lnr-heart" data-toggle="tooltip" data-placement="left" title="Wishlist"></i>
-                                            </a>
-                                            <a href="#exampleModalCenter" title="Quick View" data-toggle="modal" data-target="#exampleModalCenter">
-                                                <i class="lnr lnr-eye" data-toggle="tooltip" data-placement="left" title="Quick View"></i>
-                                            </a>
-                                        </div>
-                                    </div>
                                     @foreach ($productos as $producto)
                                     <div class="product-content">
                                         <div class="product-title">
                                             <h4 class="title-2"> <a href="product-details.html">{{ $producto->nombreProducto }}</a></h4>
                                         </div>
-
                                         <div class="price-box">
                                             <span class="regular-price ">{{ $producto->precioProducto }}</span>
-
+                                                <img src="{{asset('storage').'/'.$producto->imagenProducto}}">
                                         </div>
                                         <a href="{{ url('add-to-cart/'.$producto->idProducto) }}" class="btn product-cart">Agregar al carrito</a>
                                     </div>
@@ -435,8 +417,9 @@
                                             <h4 class="title-2"> <a href="product-details.html"></a></h4>
                                         </div>
                                         <div class="price-box">
-
+                                                <img src="{{asset('storage').'/'.$producto->imagenProducto}}">
                                             <span class="old-price"><del>{{ $producto->precioProducto }}</del></span>
+                                                <img src="{{asset('storage').'/'.$producto->imagenProducto}}">
                                         </div>
                                         <p class="desc-content">{{ $producto->descripcionProducto }}</p>
                                         <div class="button-listview">
@@ -456,9 +439,6 @@
                             <div class="product-item">
                                 <div class="single-product position-relative mr-0 ml-0">
                                     <div class="product-image">
-                                        <a class="d-block" href="product-details.html">
-                                            <img src="assets/images/product/5.jpg" alt="" class="product-image-1 w-100">
-                                        </a>
                                         <div class="add-action d-flex flex-column position-absolute">
                                             <a href="compare.html" title="Compare">
                                                 <i class="lnr lnr-sync" data-toggle="tooltip" data-placement="left" title="Compare"></i>
@@ -470,11 +450,9 @@
                                                 <i class="lnr lnr-eye" data-toggle="tooltip" data-placement="left" title="Quick View"></i>
                                             </a>
                                         </div>
-
                                     </div>
                                     @endforeach
                                     </div>
-
                                 </div>
                             </div>
 

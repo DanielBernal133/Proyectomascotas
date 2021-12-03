@@ -39,8 +39,12 @@ class LoginController extends Controller
             }
             //usuario autenticado
         }else if(Auth::check() && Auth::user()->idRolFK== '4'){
-
-            return redirect('/');
+            $consulta = DB::table('cliente')->where('idUsuarioFK', Auth::user()->idUsuario)->doesntExist();
+            if($consulta){
+                return redirect('perfil')->with('mensaje_war', "Debes completar tus datos faltantes para poder hacer una compra. da click en Registro Datos");
+            }else{
+                return redirect('/');
+            }
         }else if ( Auth::check() && Auth::user()->idRolFK== '3'){
             $consulta = DB::table('empleado')->where('idUsuarioFK', Auth::user()->idUsuario)->doesntExist();
             if($consulta){
@@ -76,7 +80,7 @@ class LoginController extends Controller
 
     public function perfil(){
 
-        $producto = Pedido::where('idClienteFK' , '=' , Auth::user()->idUsuario)->get();
+        $producto = Pedido::where('idClienteFK' , Auth::user()->idUsuario)->get();
         $nombreproduc = DB::table('pedidodeproducto')
                                      ->join('pedido', 'pedidodeproducto.idPedidoFK', '=', 'pedido.idPedido')
                                      ->join('producto', 'pedidodeproducto.idProductoFK', '=', 'producto.idProducto')
@@ -84,9 +88,7 @@ class LoginController extends Controller
                                      ->where('idClienteFK', Auth::user()->idUsuario)
                                      ->get();
         $cliente = Cliente::where('idUsuarioFK' , '=' , Auth::user()->idUsuario)->get();
-        return view('clientesdelavista.tables2')->with('clientes', $cliente)->with('detalles' , $producto)->with('detaller' , $nombreproduc);
-
-
+        return view('clientesdelavista.tables2')->with('detallees' , $producto)->with('clientes', $cliente)->with('detaller' , $nombreproduc);
     }
 }
 

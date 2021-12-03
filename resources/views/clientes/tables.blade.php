@@ -41,7 +41,7 @@
             </a>
 
             <!-- Divider -->
-            
+
             <div class="sidebar-heading">
                 Acciones
             </div>
@@ -51,6 +51,11 @@
                 <a class="nav-link" href="{{url('Pedidos')}}">
                     <i class="fab fa-product-hunt"></i>
                     <span>Pedidos</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('cancelacion')}}">
+                    <i class="far fa-window-close"></i>
+                    <span>Cancelacion de Pedidos</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{url('Productos')}}">

@@ -43,7 +43,7 @@
             </a>
 
             <!-- Divider -->
-            
+
             <div class="sidebar-heading">
                 Acciones
             </div>
@@ -53,6 +53,11 @@
                 <a class="nav-link" href="{{url('Productos')}}">
                     <i class="fab fa-product-hunt"></i>
                     <span>Productos</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('cancelacion')}}">
+                    <i class="far fa-window-close"></i>
+                    <span>Cancelacion de Pedidos</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{url('empleados')}}">
@@ -327,7 +332,7 @@
                                           {{-- <th>Empleado</th> --}}
                                           <th >Estado Pedido</th>
                                           <th >Acciones</th>
-                                          
+
                                         </tr>
                                       </thead>
                                     <tfoot>
@@ -340,7 +345,7 @@
                                             {{-- <th>Empleado</th> --}}
                                             <th >Estado Pedido</th>
                                             <th >Acciones</th>
-                                            
+
                                           </tr>
                                     </tfoot>
                                     <tbody>
@@ -376,7 +381,7 @@
                                                 {{$nombre->estadoPedido}}
                                             </td>
                                             <td>
-                                                @if ($nombre->fechaEnvio == null)
+                                                @if ($nombre->estadoPedido == 'En Espera')
                                                     <a href="{{url ('Pedidos/' . $nombre->idPedido . "/edit") }}" class="btn btn-info">Asignar fecha</a>
                                                 @else
                                                     <p style="color: green"><strong>Fechas validadas</strong></p>
