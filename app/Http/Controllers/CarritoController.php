@@ -23,6 +23,7 @@ class CarritoController extends Controller
     }
 
     public function addTocart($idProducto){
+
         $producto = Producto::find($idProducto);
         $cart = session()->get('cart');
         if($cart==null) {

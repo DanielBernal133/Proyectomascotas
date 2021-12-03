@@ -68,7 +68,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="contact-us.html">
+                                    <a href="{{url('carrito')}}">
                                         <span class="menu-text">Tienda</span>
                                     </a>
                                 </li>
@@ -804,5 +804,4 @@
     {{-- <div>{{ session("mensaje_exito") }} </div> --}}
     @endif
 </body>
-
 </html>

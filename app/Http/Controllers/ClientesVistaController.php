@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class ClientesVistaController extends Controller
 {
- 
+
     public function show(Cliente $cliente)
     {
         $usuarios=Usuario::find($cliente);
@@ -39,7 +39,6 @@ class ClientesVistaController extends Controller
     {
         $cliente = Usuario::find($cliente);
         //actualizar el cliente que llega atravez del comdel binding
-
         $cliente->email = $request->input("email");
         $cliente->apellido = $request->input("apellido");
         $cliente->name = $request->input("name");

@@ -74,7 +74,7 @@
                                     <div class="ml-2 d-inline-block">
                                     <div class="checkbox">
                                         <label for="checkboxes-0">
-                                        <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+                                        <input type="checkbox" name="checkboxes" id="checkboxes-0" value="readonly">
                                         <strong class="text-danger">{{ $errors->first('checkboxes')}}</strong>
                                         Acepto <a class=""  href="{{url ('L')}}">términos y condiciones </a>y <a class="" href="{{url ('O')}}">autorizo tratamiento de datos y políticas.</a>
                                         </label>

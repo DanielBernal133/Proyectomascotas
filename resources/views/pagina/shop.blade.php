@@ -360,7 +360,7 @@
                         <h3 class="title-3">Carrito Woofmate</h3>
                         <ul>
                             <li><a href="{{ url('/') }}">Inicio</a></li>
-                            <li>Tienda</li>
+                            <li><a href="{{ url('/') }}">Tienda</li>
                         </ul>
                     </div>
                 </div>
@@ -401,15 +401,30 @@
                         <div class="col-md-6 col-sm-6 col-lg-4 col-custom product-area">
                             <div class="product-item">
                                 <div class="single-product position-relative mr-0 ml-0">
+                                    <div class="product-image">
+                                        <a class="d-block" href="product-details.html">
+
+                                        </a>
+                                        <span class="onsale">Sale!</span>
+                                        <div class="add-action d-flex flex-column position-absolute">
+
+
+                                            <a href="#exampleModalCenter" title="Quick View" data-toggle="modal" data-target="#exampleModalCenter">
+                                                <i class="lnr lnr-eye" data-toggle="tooltip" data-placement="left" title="Quick View"></i>
+                                            </a>
+                                        </div>
+                                    </div>
                                     @foreach ($productos as $producto)
                                     <div class="product-content">
                                         <div class="product-title">
+
+
                                             <h4 class="title-2"> <a href="product-details.html">{{ $producto->nombreProducto }}</a></h4>
                                         </div>
                                         <div class="price-box">
                                             <span class="regular-price ">{{ $producto->precioProducto }}</span>
-                                                <img src="{{asset('storage').'/'.$producto->imagenProducto}}">
                                         </div>
+
                                         <a href="{{ url('add-to-cart/'.$producto->idProducto) }}" class="btn product-cart">Agregar al carrito</a>
                                     </div>
                                     <div class="product-content-listview">
@@ -417,11 +432,19 @@
                                             <h4 class="title-2"> <a href="product-details.html"></a></h4>
                                         </div>
                                         <div class="price-box">
+
                                                 <img src="{{asset('storage').'/'.$producto->imagenProducto}}">
+
                                             <span class="old-price"><del>{{ $producto->precioProducto }}</del></span>
+
                                                 <img src="{{asset('storage').'/'.$producto->imagenProducto}}">
+
                                         </div>
+
                                         <p class="desc-content">{{ $producto->descripcionProducto }}</p>
+                                        <a href="#">
+                                            <img src="{{asset('storage').'/'.$producto->imagenProducto}}">
+                                        </a>
                                         <div class="button-listview">
                                             <a href="{{ url('add-to-cart/'.$producto->idProducto) }}" class="btn product-cart button-icon flosun-button dark-btn" data-toggle="tooltip" data-placement="top" title="Add to Cart"> <span>Añadir al carrito</span> </a>
                                             <a class="list-icon" href="compare.html" title="Compare">
