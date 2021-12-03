@@ -13,4 +13,9 @@ protected $primaryKey ="idProductoFK , idPedidoFK";
 
     //omitir campos de auditoria
     public $timestamps = false;
+
+    public function productos(){
+        return $this->hasOne(Producto::class, 'nombreProducto', 'nombreProducto');
+    }
 }
+
