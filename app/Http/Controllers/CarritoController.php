@@ -31,7 +31,8 @@ class CarritoController extends Controller
                         "cantidad" => 1,
                         "nombre"=>$producto->nombreProducto,
                         "precio" => $producto->precioProducto,
-                        "IdProducto" => $producto->idProducto
+                        "IdProducto" => $producto->idProducto,
+                        "ImagenProducto" => $producto->imagenProducto
                     ]
             ];
             session()->put('cart', $cart);
@@ -46,7 +47,8 @@ class CarritoController extends Controller
                 "cantidad" => 1,
                 "nombre"=>$producto->nombreProducto,
                 "precio" => $producto->precioProducto,
-                "IdProducto" => $producto->idProducto
+                "IdProducto" => $producto->idProducto,
+                "ImagenProducto" => $producto->imagenProducto
             ];
             session()->put('cart', $cart);
             return redirect('carrito')->with('mensaje_exito', "Producto añadido al carrito");

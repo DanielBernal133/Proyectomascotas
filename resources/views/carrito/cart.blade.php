@@ -394,7 +394,7 @@
                                         @foreach (session('cart') as $idProducto => $detalles)
                                             <?php $total += $detalles['precio'] * $detalles['cantidad'] ?>
                                     <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/images/product/small-size/1.jpg" alt="Product" /></a></td>
+                                    <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{asset('storage').'/'. $detalles['ImagenProducto']}}" alt="Product" /></a></td>
                                     <td class="pro-title"><a href="#">{{ $detalles['nombre'] }}</td>
                                     <td class="pro-price"><span> {{ $detalles['precio'] }}</span></td>
                                     <td class="pro-quantity">
@@ -444,7 +444,7 @@
                                 <?php
                                 $cart = session()->get('cart');
                                 ?>
-                                
+
                                 @if ($cart == null)
                                     <center><p><strong>No tienes productos en el carrito </strong></p></center>
                                 @else
