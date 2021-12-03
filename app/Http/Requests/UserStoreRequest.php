@@ -24,19 +24,13 @@ class UserStoreRequest extends FormRequest
     public function rules()
     {
         return [
-<<<<<<< HEAD
-            'email'=> 'required|email|unique:usuario,email',
-            'password'=> 'required|confirmed',
-            'name'=> 'required|alpha_num|unique:usuario,name'
-=======
             'email'=> 'required|email|exists:usuario,email',
             'password'=> 'required|confirmed',
             'name'=> 'required|alpha|',
             'apellido'=> 'required|alpha|',
             'checkboxes'=>'required',
 
-         
->>>>>>> Camila
+
         ];
     }
 }

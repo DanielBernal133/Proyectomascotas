@@ -114,6 +114,7 @@ Route::get('pdfprod', 'PDFControllerProducto@pdf');
 Route::get('pdfclie', 'PDFControllerCliente@pdf');
 Route::get('pdfemple', 'PDFControllerEmpleado@pdf');
 Route::get('pdfpedi', 'PDFControllerPedido@pdf');
+Route::get('pdfdeta', 'PDFControllerDetalle@pdf');
 
 //rutas de reset password
 

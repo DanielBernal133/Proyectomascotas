@@ -486,7 +486,7 @@
                                                             <td>10/09/2021</td>
                                                             <td>Pendiente</td>
                                                             <td>$3000</td>
-                                                            <td><a href="cart.html" class="btn flosun-button secondary-btn theme-color  rounded-0">Ver</a></td>
+                                                            <td><a href="{{url ('pdfdeta')}}" class="btn flosun-button secondary-btn theme-color  rounded-0">Ver</a></td>
                                                         </tr>
                                                         <tr>
                                                             <td>2</td>
